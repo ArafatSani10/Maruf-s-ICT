@@ -5,7 +5,7 @@ import animationData from "../../../../public/Lottie/Study Abroad.json";
 
 const Banner = () => {
     return (
-        <div className="w-full bg-transparent text-white py-16 md:py-24 overflow-hidden">
+        <div className="w-full mt-6  bg-transparent text-white py-16 md:py-24 overflow-hidden">
             <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-10">
                     <motion.div
