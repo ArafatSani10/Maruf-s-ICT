@@ -283,6 +283,7 @@ const Navbar = () => {
         { name: 'Home', to: '/' },
         { name: 'About', to: '/about' },
         { name: 'Batches', to: '/batches' },
+        { name: 'Branches', to: '/branches' },
         { name: 'Books', to: '/books' },
         { name: 'Instructors', to: '/instructor' },
         { name: 'Contact Us', to: '/contact-us' },
@@ -424,7 +425,7 @@ const Navbar = () => {
                     </motion.div>
 
                     {/* Desktop Navigation */}
-                    <div className='hidden md:flex items-center space-x-6'>
+                    <div className='hidden md:flex items-center space-x-4'>
                         {navItems.map((item, index) => (
                             <motion.div
                                 key={item.name}

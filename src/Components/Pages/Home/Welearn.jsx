@@ -12,8 +12,13 @@ const statsData = [
     },
     {
         icon: GraduationCap,
-        number: "100+",
-        label: "সর্বমোট কোর্স"
+        number: "2+",
+        label: "সর্বমোট শাখা"
+    },
+    {
+        icon: GraduationCap,
+        number: "8+",
+        label: "সর্বমোট ব্যাচ "
     },
     {
         icon: Users,
@@ -59,13 +64,13 @@ const Welearn = () => {
                 {/* Title Section */}
                 <div className='text-center mb-16'>
                     <h2 className='text-4xl md:text-5xl font-extrabold text-[#00baff]'>
-                        এক নজরে - উই লার্ন
+                        এক নজরে - Maruf's ICT Care
                     </h2>
                     <div className='w-24 h-1 bg-indigo-500 mx-auto mt-4 rounded-full'></div>
                 </div>
 
                 {/* Statistics Cards Grid */}
-                <div className='grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-4'>
+                <div className='grid grid-cols-1 md:grid-cols-5 gap-6 lg:gap-4'>
                     {statsData.map((stat, index) => (
                         <StatCard
                             key={index}

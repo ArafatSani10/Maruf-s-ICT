@@ -58,15 +58,15 @@ const batches = [
 
 const FeaturedBatchesSlider = () => {
     return (
-        <div className="bg-[#00091a] text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#00091a] text-white py-5 px-4 sm:px-6 lg:px-8">
             {/* Enhanced Header */}
             <div className="text-center mb-12">
                 <div className="inline-flex items-center gap-2 bg-blue-900/20 border border-blue-500/30 px-4 py-2 rounded-full mb-4">
                     <Star className="w-4 h-4 text-yellow-400 fill-current" />
                     <span className="text-sm font-medium text-blue-300">Featured Batches</span>
                 </div>
-                <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
-                    Discover Featured <span className="text-blue-400">Batches</span>
+                <h2 className="text-2xl lg:text-5xl font-bold text-[#00baff]">
+                    Discover Featured Batches
                 </h2>
                 <p className="text-gray-300 mt-4 max-w-2xl mx-auto text-lg leading-relaxed">
                     Join thousands of successful students in our comprehensive courses
@@ -117,9 +117,7 @@ const FeaturedBatchesSlider = () => {
                                                 <div className="flex items-baseline gap-1">
                                                     <span className="text-2xl font-bold">{batch.price}</span>
                                                 </div>
-                                                <span className="text-sm text-blue-200 line-through">
-                                                    {batch.originalPrice}
-                                                </span>
+                                              
                                             </div>
                                         </div>
                                     </div>
