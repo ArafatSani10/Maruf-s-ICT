@@ -5,7 +5,7 @@ import Footer from '../Components/Pages/Shared/Footer/Footer';
 
 const Mainlayout = () => {
     return (
-        <div>
+        <div className='bg-[#00091a] min-h-screen text-white font-roboto overflow-x-hidden overflow-y-hidden'>
             <Navbar></Navbar>
             <Outlet></Outlet>
             <Footer></Footer>
