@@ -40,7 +40,7 @@ const Banner = () => {
                             transition={{ duration: 1, delay: 0.4 }}
                         >
                             <button className="px-6 py-3 rounded-lg font-semibold bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-blue-600 hover:to-indigo-600 transition duration-300 ">
-                                Start Your Journey
+                               Online  Admission
                             </button>
                             <button className="px-6 py-3 rounded-lg font-semibold border border-indigo-400 text-indigo-400 hover:bg-indigo-500 hover:text-white transition duration-300">
                                 Student Login

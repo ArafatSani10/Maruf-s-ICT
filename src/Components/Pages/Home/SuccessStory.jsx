@@ -126,7 +126,7 @@ const SuccessStory = () => {
 
     return (
         <div className="relative py-16 overflow-hidden px-4 bg-transparent text-white">
-            <div className="max-w-7xl mx-auto">
+            <div className="max-w-[1700px] mx-auto">
                 <div className="mb-16 text-center">
                     <motion.h2
                         className="text-2xl md:text-5xl font-extrabold text-[#00baff]"
