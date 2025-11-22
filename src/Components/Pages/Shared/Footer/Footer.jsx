@@ -7,7 +7,7 @@ import { MdPhone, MdEmail, MdLocationOn } from 'react-icons/md';
 const Footer = () => {
     return (
         // Main Footer Container with gradient background
-        <footer className="bg-gray-900 text-gray-400">
+        <footer className="bg-transparent text-gray-400">
             <div className="border-t border-gray-700/50 pt-16 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-20">
                     
