@@ -104,16 +104,20 @@ const Login = () => {
                         </div>
 
                         {/* Back to Home Button */}
-                       <Link to="/">
-                        <button
-                            type="button"
-                            onClick={() => console.log('Going back to home')}
-                            className="w-full mt-4 py-3 px-4 border border-gray-300 text-gray-200 font-medium rounded-xl shadow-sm hover:text-gray-800 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
-                        >
-                            হোম পেজে ফিরে যান
-                        </button>
-                       </Link>
+
+                        <Link to="/register">
+
+                            <button
+                                type="button"
+                                onClick={() => console.log('Going back to home')}
+                                className="w-full mt-4 py-3 px-4 border border-gray-300 bg-gradient-to-r from-blue-500 to-purple-600 text-white  font-medium rounded-xl shadow-sm hover:text-gray-800 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                            >
+                                নতুন অ্যাকাউন্ট তৈরি করুন
+                            </button>
+
+                        </Link>
                     </div>
+
                 </div>
             </div>
         </div>

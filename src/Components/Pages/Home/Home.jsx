@@ -5,6 +5,7 @@ import WhyMarufsir from './WhyMarufsir';
 import FeaturedBatchesSlider from './FeaturedBatchesSlider';
 import OurBooks from './OurBooks';
 import SuccessStory from './SuccessStory';
+import CTA from './CTA';
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
             <FeaturedBatchesSlider></FeaturedBatchesSlider>
             <OurBooks></OurBooks>
             <SuccessStory></SuccessStory>
+            <CTA></CTA>
         </div>
     );
 };

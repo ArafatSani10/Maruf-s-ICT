@@ -2,12 +2,14 @@ import React from 'react';
 import InstructorBanner from './InstructorBanner';
 import InstructorInfo from './Instructorinfo';
 import SuccessStory from '../Home/SuccessStory';
+import InstructorData from './InstructorData';
 
 const Instructors = () => {
     return (
         <div>
             <InstructorBanner></InstructorBanner>
             <InstructorInfo></InstructorInfo>
+            <InstructorData></InstructorData>
             <SuccessStory></SuccessStory>
         </div>
     );

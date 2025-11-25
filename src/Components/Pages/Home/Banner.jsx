@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
-import animationData from "../../../../public/Lottie/Study Abroad.json";
+import animationData from "../../../../public/Lottie/Student.json";
 
 const Banner = () => {
     return (
@@ -40,7 +40,7 @@ const Banner = () => {
                             transition={{ duration: 1, delay: 0.4 }}
                         >
                             <button className="px-6 py-3 rounded-lg font-semibold bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-blue-600 hover:to-indigo-600 transition duration-300 ">
-                               Online  Admission
+                                Online  Admission
                             </button>
                             <button className="px-6 py-3 rounded-lg font-semibold border border-indigo-400 text-indigo-400 hover:bg-indigo-500 hover:text-white transition duration-300">
                                 Student Login
@@ -49,7 +49,7 @@ const Banner = () => {
                     </motion.div>
 
                     <motion.div
-                        className="w-full md:w-1/2"
+                        className="w-full md:w-[500px]"
                         initial={{ opacity: 0, x: 80 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}

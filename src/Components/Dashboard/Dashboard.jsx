@@ -203,10 +203,17 @@ const Dashboard = () => {
             Icon: FaUsers,
             label: 'Batch',
         },
+
         {
             path: '/dashboard/enrollment-student',
             Icon: FaUserPlus,
             label: 'Enroll Student',
+        },
+
+        {
+            path: '/dashboard/id-card',
+            Icon: FaUserPlus,
+            label: 'ID Card',
         },
         {
             path: '/dashboard/module',
@@ -234,12 +241,31 @@ const Dashboard = () => {
             Icon: FaMoneyBillWave,
             label: 'Cp',
         },
-        { path: '/dashboard/sms-template', Icon: FaClipboardList, label: 'SMS Template', },
+        {
+            path: '/dashboard/sms-template',
+            Icon: FaClipboardList,
+            label: 'SMS Template',
+        },
 
 
-        { path: '/dashboard/Bulk-SMS', Icon: FaUsers, label: 'Bulk SMS', },
-        // { path: '/dashboard/custom-design', Icon: FaGraduationCap, label: 'Custom LP & Settings', },
-        // { path: '/dashboard/subscriptions', Icon: FaDollarSign, label: 'Subscriptions', },
+        {
+            path: '/dashboard/Bulk-SMS',
+            Icon: FaUsers,
+            label: 'Bulk SMS',
+        },
+
+        {
+            path: '/dashboard/notice',
+            Icon: FaUsers,
+            label: 'Notice',
+        },
+
+        {
+            path: '/dashboard/subscription',
+            Icon: FaUsers,
+            label: 'Subscription',
+        },
+
     ];
 
     const quickLinks = [

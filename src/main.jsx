@@ -26,6 +26,10 @@ import Expenses from './Components/AdminDashboard/Expenses.jsx';
 import SettingsPage from './Components/AdminDashboard/SettingsPage.jsx';
 import SMSTemplate from './Components/AdminDashboard/SMSTemplate.jsx';
 import BulkSMS from './Components/AdminDashboard/BulkSMS.jsx';
+import Notice from './Components/AdminDashboard/Notice.jsx';
+import IDCard from './Components/AdminDashboard/IDCard.jsx';
+import SubscriptionPage from './Components/AdminDashboard/SubscriptionPage.jsx';
+import RegistrationForm from './Components/Pages/Login/RegistrationForm.jsx';
 
 const router = createBrowserRouter([
   {
@@ -64,6 +68,11 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login></Login>
+      },
+
+      {
+        path:'/register',
+        element:<RegistrationForm></RegistrationForm>
       },
     ],
   },
@@ -121,6 +130,21 @@ const router = createBrowserRouter([
       {
         path: 'Bulk-SMS',
         element: <BulkSMS></BulkSMS>
+      },
+
+      {
+        path:'notice',
+        element:<Notice></Notice>
+      },
+
+      {
+        path:"id-Card",
+        element:<IDCard></IDCard>
+      },
+
+      {
+        path:'subscription',
+        element:<SubscriptionPage></SubscriptionPage>
       },
     ]
   },

@@ -29,7 +29,7 @@ const skills = [
   { name: 'Docker', color: 'text-blue-600', radius: ORBITAL_SIZES.medium.name, duration: ORBITAL_SIZES.medium.duration, logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg' },
   { name: 'AWS', color: 'text-orange-400', radius: ORBITAL_SIZES.medium.name, duration: ORBITAL_SIZES.medium.duration, logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg' },
   { name: 'AI/ML', color: 'text-purple-500', radius: ORBITAL_SIZES.medium.name, duration: ORBITAL_SIZES.medium.duration, logo: 'https://i.ibb.co/r7b6t12/ai-logo.png' },
-]; 
+];
 
 // --- Global CSS Styles (Rotation Keyframes remain the same) ---
 const globalStyles = `
@@ -74,31 +74,31 @@ const getResponsiveOrbitalHalfSize = (orbitalType, windowWidth) => {
     const vw = windowWidth;
     if (orbitalType === 'small') {
       // 1st orbit: around 50% of screen width
-      finalPx = vw * 0.50; 
+      finalPx = vw * 0.50;
     } else { // 'medium'
       // 2nd orbit: around 75% of screen width
-      finalPx = vw * 0.75; 
+      finalPx = vw * 0.75;
     }
   } else {
     // Large screen: use the fixed base pixel value
     finalPx = basePx;
   }
-  
+
   // Return the radius (half size)
   return finalPx / 2;
 };
 
 // Function to convert base class to responsive class (only for the outer rings)
 const getResponsiveRadiusClass = (orbitalType, windowWidth) => {
-    const isSmallScreen = windowWidth < 1024;
-    
-    if (isSmallScreen) {
-        // Use custom Tailwind classes for small screens (e.g., w-[50vw] for the diameter)
-        if (orbitalType === 'small') return 'w-[50vw] h-[50vw]'; 
-        if (orbitalType === 'medium') return 'w-[75vw] h-[75vw]'; 
-    }
-    // Large screen: use the fixed original class
-    return ORBITAL_SIZES[orbitalType].name;
+  const isSmallScreen = windowWidth < 1024;
+
+  if (isSmallScreen) {
+    // Use custom Tailwind classes for small screens (e.g., w-[50vw] for the diameter)
+    if (orbitalType === 'small') return 'w-[50vw] h-[50vw]';
+    if (orbitalType === 'medium') return 'w-[75vw] h-[75vw]';
+  }
+  // Large screen: use the fixed original class
+  return ORBITAL_SIZES[orbitalType].name;
 }
 
 function InstructorInfo() {
@@ -145,7 +145,7 @@ function InstructorInfo() {
       [ORBITAL_SIZES.small.name]: 'small',
       [ORBITAL_SIZES.medium.name]: 'medium',
     };
-    
+
     const orbitals = [];
     let currentOrbital = [];
     let currentRadius = '';
@@ -154,26 +154,26 @@ function InstructorInfo() {
       if (currentRadius === '' || skill.radius === currentRadius) {
         currentOrbital.push(skill);
       } else {
-        orbitals.push({ 
-            skills: currentOrbital, 
-            type: orbitalTypes[currentRadius]
+        orbitals.push({
+          skills: currentOrbital,
+          type: orbitalTypes[currentRadius]
         });
         currentOrbital = [skill];
       }
       currentRadius = skill.radius;
     });
     if (currentOrbital.length > 0) {
-      orbitals.push({ 
-          skills: currentOrbital, 
-          type: orbitalTypes[currentRadius] 
+      orbitals.push({
+        skills: currentOrbital,
+        type: orbitalTypes[currentRadius]
       });
     }
     return orbitals;
   };
 
   const orbitalGroups = groupSkillsByOrbital();
-  
-  const skillIconSize = 56; 
+
+  const skillIconSize = 56;
 
   return (
     <>
@@ -181,7 +181,7 @@ function InstructorInfo() {
 
       <div className="min-h-screen bg-transparent flex items-center justify-center p-4 overflow-hidden">
         <div className="flex flex-col lg:flex-row w-full max-w-[1300px] mx-auto">
-          
+
           {/* Left Side: Instructor Info */}
           <div className="flex-1 min-h-[40vh] flex items-center justify-center lg:justify-start">
             <div className="flex flex-col items-center lg:items-start p-1 md:p-5 text-center lg:text-left">
@@ -200,7 +200,7 @@ function InstructorInfo() {
 
           <div className="flex-1 min-h-[50vh] flex items-center justify-center relative py-10 lg:min-h-screen">
             <div className="flex justify-center items-center w-full h-full relative" style={{ minHeight: windowWidth < 1024 ? `${windowWidth * 0.8}px` : 'auto' }}>
-              
+
               <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-yellow-600 shadow-custom-sun absolute z-10 flex items-center justify-center p-1 overflow-hidden">
                 <img
                   src={instructorImage}
@@ -211,21 +211,21 @@ function InstructorInfo() {
 
               {orbitalGroups.map((orbitalGroup, orbitalIndex) => {
                 const { skills: orbitalSkills, type } = orbitalGroup;
-                
+
                 const isCounterClockwiseOrbital = orbitalIndex % 2 === 0;
                 const orbitalAnimationName = isCounterClockwiseOrbital
                   ? 'orbital-spin-counter-clockwise'
                   : 'orbital-spin-clockwise';
 
                 const orbitalHalfSize = getResponsiveOrbitalHalfSize(type, windowWidth);
-                const responsiveRadiusClass = getResponsiveRadiusClass(type, windowWidth); 
+                const responsiveRadiusClass = getResponsiveRadiusClass(type, windowWidth);
 
                 return (
                   <div
                     key={`orbital-${orbitalIndex}`}
                     className={`absolute rounded-full border border-opacity-30 border-gray-600 flex justify-center items-center ${responsiveRadiusClass}`}
                     style={{
-                      
+
                       animation: `${orbitalAnimationName} ${orbitalSkills[0].duration} linear infinite`,
                       transformStyle: 'preserve-3d',
                       transformOrigin: 'center',
@@ -233,7 +233,7 @@ function InstructorInfo() {
                   >
                     {orbitalSkills.map((skill, skillInnerIndex) => {
                       const numberOfSkillsInOrbital = orbitalSkills.length;
-                      
+
                       const angle = (360 / numberOfSkillsInOrbital) * skillInnerIndex;
                       const angleRad = angle * (Math.PI / 180);
 
