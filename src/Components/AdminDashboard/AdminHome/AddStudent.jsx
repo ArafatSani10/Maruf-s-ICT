@@ -6,29 +6,36 @@ import {
 } from 'react-icons/fa';
 
 const AddStudent = ({ isOpen, onClose }) => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
         console.log(data);
+        reset();
         onClose();
     };
 
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-[9999] w-screen h-screen flex items-center justify-center">
-            <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm" onClick={onClose} />
+        <div className="fixed inset-0 z-[9999] w-screen h-screen flex items-center justify-center overflow-hidden">
+            <div className="absolute inset-0 bg-slate-900/55 backdrop-blur-sm" onClick={onClose} />
 
-            <div className="relative bg-white w-full max-w-6xl rounded-md shadow-sm flex flex-col max-h-[95vh] overflow-hidden">
+            <div className="relative bg-white w-[95%] max-w-6xl rounded-2xl shadow-2xl flex flex-col max-h-[95vh] overflow-hidden border border-gray-100">
 
-                <div className="flex justify-between items-center px-8 py-5 bg-indigo-600">
+                <div className="flex justify-between items-center px-6 py-4 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white rounded-t-2xl">
                     <div className="flex items-center gap-3">
-                        <FaUser className="text-white text-xl" />
-                        <h2 className="text-xl font-bold text-white">New Student Admission</h2>
+                        <div className="p-2 bg-white/20 rounded-md">
+                            <FaUser className="text-white text-lg" />
+                        </div>
+                        <div>
+                            <h2 className="text-lg font-semibold">New Student Admission</h2>
+                            <p className="text-xs opacity-90">Quickly add a student record</p>
+                        </div>
                     </div>
                     <button
-                        onClick={onClose}
-                        className="p-2 bg-white/20 hover:bg-red-500 text-white rounded-sm transition-colors"
+                        onClick={() => { reset(); onClose(); }}
+                        aria-label="Close"
+                        className="p-2 bg-white/10 hover:bg-white/20 rounded-md transition-all"
                     >
                         <FaTimes size={18} />
                     </button>
@@ -61,11 +68,13 @@ const AddStudent = ({ isOpen, onClose }) => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-1">
                                 <label className="text-xs font-bold text-gray-600 uppercase">Student Name *</label>
-                                <input {...register("studentName", { required: true })} placeholder="Enter full name" className="w-full p-3 border border-gray-300 rounded-sm outline-none focus:border-indigo-500 text-sm" />
+                                <input {...register("studentName", { required: 'Student name is required' })} placeholder="Enter full name" aria-invalid={errors.studentName ? 'true' : 'false'} className={`w-full p-3 border ${errors.studentName ? 'border-red-400' : 'border-gray-300'} rounded-lg outline-none focus:ring-2 focus:ring-indigo-100 text-sm bg-white`} />
+                                {errors.studentName && <p className="text-xs text-red-500 mt-1">{errors.studentName.message}</p>}
                             </div>
                             <div className="space-y-1">
                                 <label className="text-xs font-bold text-gray-600 uppercase">Phone Number *</label>
-                                <input {...register("phoneNumber", { required: true })} placeholder="01XXXXXXXXX" className="w-full p-3 border border-gray-300 rounded-sm outline-none focus:border-indigo-500 text-sm" />
+                                <input {...register("phoneNumber", { required: 'Phone number is required' })} placeholder="01XXXXXXXXX" aria-invalid={errors.phoneNumber ? 'true' : 'false'} className={`w-full p-3 border ${errors.phoneNumber ? 'border-red-400' : 'border-gray-300'} rounded-lg outline-none focus:ring-2 focus:ring-indigo-100 text-sm bg-white`} />
+                                {errors.phoneNumber && <p className="text-xs text-red-500 mt-1">{errors.phoneNumber.message}</p>}
                             </div>
                             <div className="space-y-1">
                                 <label className="text-xs font-bold text-gray-600 uppercase">Email (Optional)</label>
@@ -220,9 +229,9 @@ const AddStudent = ({ isOpen, onClose }) => {
 
                 </form>
 
-                <div className="px-8 py-5 border-t bg-white flex justify-end gap-3 sticky bottom-0">
-                    <button type="button" onClick={onClose} className="px-6 py-2.5 text-sm font-bold text-gray-500 hover:bg-gray-100 rounded-sm transition-colors">Cancel</button>
-                    <button onClick={handleSubmit(onSubmit)} className="px-8 py-2.5 text-sm font-bold bg-indigo-600 text-white rounded-sm shadow-lg hover:bg-indigo-700 transition-all active:scale-95">Submit Admission</button>
+                <div className="px-6 py-4 border-t bg-white flex justify-end gap-3 rounded-b-2xl sticky bottom-0">
+                    <button type="button" onClick={() => { reset(); onClose(); }} className="px-5 py-2 text-sm font-semibold text-gray-600 hover:bg-gray-100 rounded-md transition-all">Cancel</button>
+                    <button onClick={handleSubmit(onSubmit)} className="px-6 py-2 text-sm font-semibold bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-700 transition-transform active:scale-95">Submit Admission</button>
                 </div>
             </div>
         </div>
