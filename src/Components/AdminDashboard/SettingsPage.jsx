@@ -138,7 +138,7 @@ const FeatureItem = ({ feature, onEdit, onSave, onDelete, isEditing, onChange })
                     type="text"
                     value={feature.text}
                     onChange={(e) => onChange(feature.id, e.target.value)}
-                    className="w-full p-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full p-3 border border-blue-200 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     autoFocus
                 />
             ) : (
@@ -152,21 +152,21 @@ const FeatureItem = ({ feature, onEdit, onSave, onDelete, isEditing, onChange })
             {isEditing ? (
                 <button
                     onClick={() => onSave(feature.id)}
-                    className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                    className="p-2 text-green-600 hover:bg-green-50 rounded-md transition-colors"
                 >
                     <CheckCircle className="w-4 h-4" />
                 </button>
             ) : (
                 <button
                     onClick={() => onEdit(feature.id)}
-                    className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                    className="p-2 text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
                 >
                     <Edit className="w-4 h-4" />
                 </button>
             )}
             <button
                 onClick={() => onDelete(feature.id)}
-                className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                className="p-2 text-red-600 hover:bg-red-50 rounded-md transition-colors"
             >
                 <Trash2 className="w-4 h-4" />
             </button>
@@ -189,7 +189,7 @@ const ColorPicker = ({ label, color, onChange, icon: Icon }) => (
             />
             <div className="flex-1">
                 <div
-                    className="w-full h-8 rounded-lg mb-2 border"
+                    className="w-full h-8 rounded-md mb-2 border"
                     style={{ backgroundColor: color }}
                 ></div>
                 <span className="text-sm font-mono text-gray-600">{color.toUpperCase()}</span>

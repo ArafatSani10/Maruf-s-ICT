@@ -47,7 +47,7 @@ const CTA = () => {
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="w-full sm:w-auto px-10 py-4 rounded-lg text-lg font-semibold
+                                className="w-full sm:w-auto px-10 py-4 rounded-md text-lg font-semibold
                                 bg-white text-blue-700 transition-all flex items-center justify-center gap-2"
                             >
                                 Register Now
@@ -60,7 +60,7 @@ const CTA = () => {
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="w-full sm:w-auto px-10 py-4 rounded-lg text-lg font-semibold
+                                className="w-full sm:w-auto px-10 py-4 rounded-md text-lg font-semibold
                                 border border-white/30 text-white bg-white/10 backdrop-blur-sm
                                 hover:bg-white/20 transition-all"
                             >

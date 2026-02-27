@@ -141,7 +141,7 @@ const EnrollmentModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex justify-center items-center">
-      <div className="relative bg-white rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
+      <div className="relative bg-white rounded-md shadow-xl w-full max-w-md mx-4 p-6">
 
         <div className="flex justify-between items-center pb-3 border-b border-gray-200">
           <h3 className="text-xl font-semibold text-gray-900">New Student Enrollment</h3>
@@ -188,7 +188,7 @@ const StudentTable = ({ students = studentData }) => {
   return (
     <div className=" bg-gray-50 min-h-screen">
 
-      <div className="bg-white p-4 rounded-lg shadow-md mb-6">
+      <div className="bg-white p-4 rounded-md shadow-md mb-6">
 
         <div className="flex flex-wrap items-center justify-between mb-4">
           <div className="flex flex-wrap items-center space-x-3 mb-4 md:mb-0">
@@ -230,7 +230,7 @@ const StudentTable = ({ students = studentData }) => {
         </div>
       </div>
 
-      <div className="overflow-x-auto bg-white rounded-lg shadow-md">
+      <div className="overflow-x-auto bg-white rounded-md shadow-md">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50 text-xs font-semibold uppercase tracking-wider text-gray-500">
             <tr>

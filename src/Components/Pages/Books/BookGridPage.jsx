@@ -87,7 +87,7 @@ const BookGridPage = () => {
                             </p>
                             
                             {/* Purchase Button */}
-                            <button className="w-full bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-700 hover:to-blue-800 text-white font-semibold py-2 px-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 text-sm">
+                            <button className="w-full bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-700 hover:to-blue-800 text-white font-semibold py-2 px-3 rounded-md transition-all duration-300 flex items-center justify-center gap-2 text-sm">
                                 <span>Buy Now</span>
                                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                             </button>

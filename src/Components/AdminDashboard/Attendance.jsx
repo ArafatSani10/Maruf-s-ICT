@@ -12,7 +12,6 @@ import {
 } from 'react-icons/fi';
 import { FaCheck } from 'react-icons/fa';
 
-// DUMMY DATA (API Data will replace these later)
 const attendanceRecords = [
     {
         date: 'October 27, 2025',
@@ -56,7 +55,7 @@ const initialOptions = {
 const ReportButton = ({ label, icon, color, active, onClick }) => (
     <button
         onClick={onClick}
-        className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition duration-150 ease-in-out ${active
+        className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out ${active
             ? `bg-${color}-600 text-white shadow-md`
             : `bg-white text-${color}-600 border border-${color}-600 hover:bg-${color}-50`
             }`}
@@ -129,7 +128,7 @@ const TakeAttendanceModal = ({ isOpen, onClose, options }) => {
 
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex justify-center items-center">
-            <div className="relative bg-white rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
+            <div className="relative bg-white rounded-md shadow-xl w-full max-w-md mx-4 p-6">
 
                 <div className="flex justify-between items-center pb-3 border-b border-gray-200">
                     <h3 className="text-xl font-semibold text-gray-900">Take Daily Attendance</h3>
@@ -183,14 +182,14 @@ const AttendanceDetailsModal = ({ isOpen, onClose, record }) => {
     const totalAbsent = record.total - record.present;
 
     const DetailItem = ({ label, value }) => (
-        <div className="p-3 bg-gray-50 rounded-lg shadow-sm">
+        <div className="p-3 bg-gray-50 rounded-md shadow-sm">
             <div className="text-xs font-medium uppercase text-gray-500">{label}</div>
             <div className="text-sm font-semibold text-gray-900 mt-1">{value}</div>
         </div>
     );
 
     const SummaryCard = ({ label, value, bgColor, textColor }) => (
-        <div className={`p-4 rounded-lg shadow-md flex-1 text-center border ${bgColor} border-gray-200`}>
+        <div className={`p-4 rounded-md shadow-md flex-1 text-center border ${bgColor} border-gray-200`}>
             <div className="text-xs font-medium uppercase text-gray-600">{label}</div>
             <div className={`text-3xl font-bold mt-1 ${textColor}`}>{value}</div>
         </div>
@@ -198,7 +197,7 @@ const AttendanceDetailsModal = ({ isOpen, onClose, record }) => {
 
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex justify-center items-center">
-            <div className="relative bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4 my-8 flex flex-col max-h-[90vh]">
+            <div className="relative bg-white rounded-md shadow-xl w-full max-w-2xl mx-4 my-8 flex flex-col max-h-[90vh]">
 
                 <div className="flex justify-between items-center p-4 border-b border-gray-200">
                     <h3 className="text-xl font-semibold text-gray-900">Attendance Details</h3>
@@ -224,7 +223,7 @@ const AttendanceDetailsModal = ({ isOpen, onClose, record }) => {
                     </div>
 
                     <h4 className="text-md font-semibold text-gray-700 mb-3">Student Details</h4>
-                    <div className="border border-gray-200 rounded-lg overflow-hidden max-h-60">
+                    <div className="border border-gray-200 rounded-md overflow-hidden max-h-60">
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50 sticky top-0">
                                 <tr>
@@ -289,7 +288,7 @@ const Attendance = () => {
     return (
         <div className=" bg-gray-50 min-h-screen">
 
-            <div className="bg-white p-4 rounded-lg shadow-md mb-6 flex justify-between items-center">
+            <div className="bg-white p-4 rounded-md shadow-md mb-6 flex justify-between items-center">
                 <div className="flex space-x-3">
                     <ReportButton
                         label="Monthly Report"
@@ -313,33 +312,33 @@ const Attendance = () => {
 
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium flex items-center shadow-md transition duration-150"
+                    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 font-medium flex items-center shadow-md transition duration-150"
                 >
                     <FiPlus className="w-5 h-5 mr-1" />
                     Take Attendance
                 </button>
             </div>
 
-            <div className="bg-white p-4 rounded-lg shadow-md mb-6 flex justify-between items-center">
+            <div className="bg-white p-4 rounded-md shadow-md mb-6 flex justify-between items-center">
 
                 <div className="relative flex-1 max-w-sm mr-4">
                     <input
                         type="text"
                         placeholder="Search batches..."
                         onChange={handleSearchChange}
-                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                     />
                     <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                 </div>
 
                 <div className="flex space-x-3">
-                    <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 flex items-center transition duration-150">
+                    <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 flex items-center transition duration-150">
                         <FiFilter className="w-4 h-4 mr-1" />
                         Filters
                     </button>
                     <button
                         onClick={handleRefresh}
-                        className="px-4 py-2 border border-green-500 text-green-600 rounded-lg hover:bg-green-50 flex items-center transition duration-150"
+                        className="px-4 py-2 border border-green-500 text-green-600 rounded-md hover:bg-green-50 flex items-center transition duration-150"
                     >
                         <FiRefreshCw className="w-4 h-4 mr-1" />
                         Refresh
@@ -351,7 +350,7 @@ const Attendance = () => {
                 Attendance Records <span className="text-gray-400">({recordCount} record found)</span>
             </div>
 
-            <div className="overflow-x-auto bg-white rounded-lg shadow-md">
+            <div className="overflow-x-auto bg-white rounded-md shadow-md">
                 <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50 text-xs font-semibold uppercase tracking-wider text-gray-500">
                         <tr>

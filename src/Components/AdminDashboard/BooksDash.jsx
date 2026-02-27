@@ -98,7 +98,7 @@ const BookRow = ({ book }) => (
 );
 
 const BookTable = ({ books }) => (
-    <div className="overflow-x-auto bg-white rounded-lg shadow-md border border-gray-200">
+    <div className="overflow-x-auto bg-white rounded-md shadow-md border border-gray-200">
         <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50 text-xs font-semibold uppercase tracking-wider text-gray-500">
                 <tr>
@@ -143,7 +143,7 @@ const AddBookModal = ({ isOpen, onClose, options }) => {
 
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex justify-center items-center">
-            <div className="relative bg-white rounded-lg shadow-xl w-full max-w-lg mx-4 p-6">
+            <div className="relative bg-white rounded-md shadow-xl w-full max-w-lg mx-4 p-6">
 
                 <div className="flex justify-between items-center pb-3 border-b border-gray-200">
                     <h3 className="text-xl font-semibold text-gray-900">Add New Book</h3>
@@ -218,7 +218,7 @@ const BooksManagement = () => {
     return (
         <div className="">
 
-            <div className="bg-white p-4 rounded-lg shadow-md mb-6 flex justify-between items-center">
+            <div className="bg-white p-4 rounded-md shadow-md mb-6 flex justify-between items-center">
 
                 <div className="flex items-center space-x-3">
                     <FilterDropdown
@@ -256,7 +256,7 @@ const BooksManagement = () => {
 // --- 2. BOOK SALES TAB COMPONENTS ---
 
 const StatCard = ({ title, value, colorClass, icon: Icon }) => (
-    <div className={`p-4 rounded-lg shadow-md flex items-center justify-between ${colorClass} min-h-[100px] w-full`}>
+    <div className={`p-4 rounded-md shadow-md flex items-center justify-between ${colorClass} min-h-[100px] w-full`}>
         <div>
             <div className="text-sm font-medium text-white opacity-90">{title}</div>
             <div className="text-3xl font-bold text-white mt-1">{value}</div>
@@ -286,7 +286,7 @@ const SaleRow = ({ sale }) => (
 );
 
 const SalesTable = ({ sales }) => (
-    <div className="overflow-x-auto bg-white rounded-lg shadow-md border border-gray-200 mt-4">
+    <div className="overflow-x-auto bg-white rounded-md shadow-md border border-gray-200 mt-4">
         <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50 text-xs font-semibold uppercase tracking-wider text-gray-500">
                 <tr>
@@ -335,7 +335,7 @@ const RecordSaleModal = ({ isOpen, onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex justify-center items-center">
-            <div className="relative bg-white rounded-lg shadow-xl w-full max-w-lg mx-4 p-6">
+            <div className="relative bg-white rounded-md shadow-xl w-full max-w-lg mx-4 p-6">
 
                 <div className="flex justify-between items-center pb-3 border-b border-gray-200">
                     <h3 className="text-xl font-semibold text-gray-900">Record Book Sale</h3>
@@ -421,7 +421,7 @@ const BookSales = ({ salesData }) => {
             </div>
 
             {/* Filters and Search */}
-            <div className="bg-white p-4 rounded-lg shadow-md mb-6 flex items-center justify-between">
+            <div className="bg-white p-4 rounded-md shadow-md mb-6 flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                     <FilterDropdown options={initialOptions.classes} onChange={handleFilterChange('class')} value={selectedFilters.class} />
                     <FilterDropdown options={initialOptions.branches} onChange={handleFilterChange('branch')} value={selectedFilters.branch} />

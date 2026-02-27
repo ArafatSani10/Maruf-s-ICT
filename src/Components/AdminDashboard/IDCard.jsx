@@ -32,7 +32,7 @@ const Logo = () => (
 // ** ID Card Front Component (Image 883365.png Match) **
 const IDCardFront = ({ student, institution }) => {
     return (
-        <div className="w-96 h-56 bg-white border border-gray-300 shadow-xl overflow-hidden relative rounded-lg transform transition-all hover:scale-[1.02] duration-300">
+        <div className="w-96 h-56 bg-white border border-gray-300 shadow-xl overflow-hidden relative rounded-md transform transition-all hover:scale-[1.02] duration-300">
             
             {/* Header Red Strip */}
             <div className="bg-red-700 h-14 flex items-center p-4">
@@ -86,7 +86,7 @@ const IDCardBack = ({ institution }) => {
     ];
 
     return (
-        <div className="w-96 h-56 bg-white border border-gray-300 shadow-xl overflow-hidden relative rounded-lg transform transition-all hover:scale-[1.02] duration-300">
+        <div className="w-96 h-56 bg-white border border-gray-300 shadow-xl overflow-hidden relative rounded-md transform transition-all hover:scale-[1.02] duration-300">
             
             <div className="p-4 flex flex-col items-center text-center">
                 <div className="h-8 w-8 bg-white rounded-full border border-gray-300 mb-2">
@@ -123,7 +123,7 @@ const IDCardPreviewModal = ({ student, institution, onClose }) => {
                         ID Card Preview
                     </h3>
                     <div className="flex items-center space-x-3">
-                        <button className="flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-md hover:bg-green-700 transition duration-150">
+                        <button className="flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md shadow-md hover:bg-green-700 transition duration-150">
                             <ArrowDownTrayIcon className="h-5 w-5 mr-2" />
                             Download PDF
                         </button>

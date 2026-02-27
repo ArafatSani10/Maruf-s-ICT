@@ -13,7 +13,7 @@ const BatchCard = ({ batch }) => {
   const [isLandingPageVisible, setIsLandingPageVisible] = useState(false);
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300 border border-gray-100">
+    <div className="bg-white p-4 rounded-md shadow-md hover:shadow-lg transition duration-300 border border-gray-100">
 
       {/* Card Header (Batch Name & Edit Icon) */}
       <div className="flex justify-between items-start mb-2">
@@ -143,7 +143,7 @@ const AddBatchModal = ({ isOpen, onClose }) => {
           <div className="pt-4">
             <button
               type="submit"
-              className="w-full py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150"
+              className="w-full py-2.5 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150"
             >
               Create Batch
             </button>

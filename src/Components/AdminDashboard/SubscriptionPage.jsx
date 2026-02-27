@@ -193,11 +193,11 @@ const SubscriptionPage = () => {
                     Contact our support team for assistance with billing, upgrades, or any questions about your subscription. Click to copy.
                 </p>
                 <div className="flex flex-wrap items-center space-x-4">
-                    <button className="flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-100 transition duration-150">
+                    <button className="flex items-center px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-100 transition duration-150">
                         <EnvelopeIcon className="h-5 w-5 mr-2 text-red-500" />
                         edutechsoftwarebd@gmail.com
                     </button>
-                    <button className="flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-100 transition duration-150">
+                    <button className="flex items-center px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-100 transition duration-150">
                         <PhoneIcon className="h-5 w-5 mr-2 text-blue-500" />
                         01660128079
                     </button>

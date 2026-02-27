@@ -211,7 +211,7 @@ const WhyMarufsir = () => {
                             ].map((program, index) => (
                                 <motion.div
                                     key={index}
-                                    className='text-gray-300 group/item hover:bg-white/5 p-3 rounded-lg transition-all duration-300'
+                                    className='text-gray-300 group/item hover:bg-white/5 p-3 rounded-md transition-all duration-300'
                                     whileHover={{ x: 5 }}
                                 >
                                     <h4 className='font-semibold text-lg text-white mb-2 border-l-2 border-blue-500 pl-3 group-hover/item:border-cyan-400 transition-colors duration-300'>
@@ -287,7 +287,7 @@ const WhyMarufsir = () => {
                             {/* Main CTA Button */}
                             <motion.div variants={fadeUp}>
                                 <motion.button
-                                    className='bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-xl py-3 px-5 rounded-lg shadow-xl transition-all duration-300 '
+                                    className='bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-xl py-3 px-5 rounded-md shadow-xl transition-all duration-300 '
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => alert('Redirecting to Free Exam Registration...')}

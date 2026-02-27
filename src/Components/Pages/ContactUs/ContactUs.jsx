@@ -111,7 +111,7 @@ const ContactUs = () => {
 
                                 {/* Captcha Input */}
                                 <div className="flex items-center space-x-4 mb-4 lg:mb-0">
-                                    <div className="text-xl font-mono px-4 py-2 bg-gray-800 rounded-lg text-yellow-400 font-bold tracking-widest select-none shadow-inner border border-yellow-700/50 transform rotate-[-2deg]">
+                                    <div className="text-xl font-mono px-4 py-2 bg-gray-800 rounded-md text-yellow-400 font-bold tracking-widest select-none shadow-inner border border-yellow-700/50 transform rotate-[-2deg]">
                                         {currentCaptcha}
                                     </div>
                                     <input

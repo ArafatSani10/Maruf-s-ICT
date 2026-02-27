@@ -52,7 +52,7 @@ const Module = () => {
 
     return (
         <div className="">
-            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+            <div className="bg-white p-6 rounded-md shadow-md border border-gray-100">
                 <div className="flex flex-wrap -mx-2">
 
                     <SelectField

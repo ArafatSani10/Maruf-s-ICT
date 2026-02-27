@@ -154,7 +154,7 @@ const Navbar = () => {
                     >
                         <Link to="/" className='flex items-center'>
                             <motion.div
-                                className='w-14 h-14 max-sm:w-10 max-sm:h-10 bg-[#00091a] rounded-lg flex items-center justify-center mr-3'
+                                className='w-14 h-14 max-sm:w-10 max-sm:h-10 bg-[#00091a] rounded-md flex items-center justify-center mr-3'
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
@@ -213,7 +213,7 @@ const Navbar = () => {
                     <div className='hidden md:flex items-center space-x-3'>
                        <Link to="/login">
                        <motion.button
-                            className='px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg transition-all duration-300 relative overflow-hidden'
+                            className='px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-md transition-all duration-300 relative overflow-hidden'
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5, delay: 0.5 }}
@@ -235,7 +235,7 @@ const Navbar = () => {
 
                     {/* Mobile Menu Button */}
                     <motion.button
-                        className='md:hidden text-white p-2 rounded-lg bg-gray-800/50 backdrop-blur-sm'
+                        className='md:hidden text-white p-2 rounded-md bg-gray-800/50 backdrop-blur-sm'
                         onClick={toggleMenu}
                         whileHover={{ scale: 1.05, backgroundColor: 'rgba(55, 65, 81, 0.5)' }}
                         whileTap={{ scale: 0.9 }}
@@ -270,7 +270,7 @@ const Navbar = () => {
                                     >
                                         <Link
                                             to={item.to}
-                                            className={`block px-4 py-3 rounded-lg transition-all duration-300 mx-2 ${isActiveLink(item.to)
+                                            className={`block px-4 py-3 rounded-md transition-all duration-300 mx-2 ${isActiveLink(item.to)
                                                 ? 'text-[#00baff] bg-blue-500/10 border-l-2 border-[#00baff]'
                                                 : 'text-white hover:text-[#00baff] hover:bg-gray-800/50'
                                                 }`}
@@ -288,7 +288,7 @@ const Navbar = () => {
                                 <div className='px-2 pt-4 space-y-3 border-t border-gray-800/50 mt-2'>
                                     <Link to="/login">
                                     <motion.button
-                                        className='w-full mx-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg transition-colors duration-300'
+                                        className='w-full mx-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-md transition-colors duration-300'
                                         variants={itemVariants}
                                         initial='closed'
                                         animate='open'

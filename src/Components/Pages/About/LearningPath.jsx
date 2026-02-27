@@ -66,7 +66,7 @@ const LearningPath = () => {
                                 transition: { type: "spring", duration: 0.3 }
                             }}
                             // **Card Style: No shadow, modern border, flatter look**
-                            className="bg-gray-900/90 backdrop-blur-sm rounded-lg p-5 text-left border border-gray-900/50 cursor-pointer h-full flex flex-col justify-between transition-colors duration-300"
+                            className="bg-gray-900/90 backdrop-blur-sm rounded-md p-5 text-left border border-gray-900/50 cursor-pointer h-full flex flex-col justify-between transition-colors duration-300"
                         >
                             <div className='flex flex-col space-y-2 items-start mb-2'>
                                 {/* Icon Circle */}

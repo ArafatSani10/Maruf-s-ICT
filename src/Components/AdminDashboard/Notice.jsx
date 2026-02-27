@@ -41,7 +41,7 @@ const AddNoticeModal = ({ isOpen, onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg shadow-xl w-full max-w-lg">
+            <div className="bg-white rounded-md shadow-xl w-full max-w-lg">
 
                 <div className="p-5 border-b flex justify-between items-center">
                     <h3 className="text-xl font-semibold text-gray-900 flex items-center">
@@ -188,7 +188,7 @@ const NoticeCard = ({ notice }) => {
     const statusColor = notice.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
 
     return (
-        <div className="bg-white p-4 rounded-lg shadow hover:shadow-md transition duration-150 border-l-4 border-green-500">
+        <div className="bg-white p-4 rounded-md shadow hover:shadow-md transition duration-150 border-l-4 border-green-500">
             <div className="flex justify-between items-start">
                 <h4 className="text-lg font-semibold text-gray-900">{notice.title}</h4>
                 <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusColor}`}>
@@ -220,7 +220,7 @@ const Notice = () => {
     return (
         <div className="p-6 bg-gray-100 min-h-screen">
 
-            <header className="bg-white p-4 rounded-lg shadow-md mb-6 flex flex-wrap items-center justify-between">
+            <header className="bg-white p-4 rounded-md shadow-md mb-6 flex flex-wrap items-center justify-between">
 
                 <div className="flex flex-wrap items-center space-x-2">
                     <label htmlFor="branch-filter" className="sr-only">Branch</label>
@@ -267,7 +267,7 @@ const Notice = () => {
                 </div>
             </header>
 
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="bg-white p-6 rounded-md shadow-md">
                 {hasNotices ? (
                     <div className="grid gap-6">
                         {notices.map(notice => (

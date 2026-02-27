@@ -50,14 +50,14 @@ const ManualInputArea = React.memo(({ initialInput, onInputReady, onCheck }) => 
                 rows="12"
                 value={localInput}
                 onChange={handleLocalChange}
-                className="w-full p-4 border border-gray-300 rounded-lg shadow-inner focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 resize-none text-sm"
+                className="w-full p-4 border border-gray-300 rounded-md shadow-inner focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 resize-none text-sm"
                 placeholder="e.g., 01712345678, 01812345678"
             ></textarea>
 
             <button
                 onClick={handleCheckClick}
                 disabled={isCheckDisabled}
-                className={`mt-4 w-full px-6 py-3 font-medium rounded-lg shadow-md text-md transition duration-150 ease-in-out ${isCheckDisabled ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-green-600 text-white hover:bg-green-700'}`}
+                className={`mt-4 w-full px-6 py-3 font-medium rounded-md shadow-md text-md transition duration-150 ease-in-out ${isCheckDisabled ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-green-600 text-white hover:bg-green-700'}`}
             >
                 Check Numbers (নাম্বার যাচাই করুন)
             </button>
@@ -124,14 +124,14 @@ const Step2ExcelUpload = React.memo(({ handleNext }) => (
         <div className="flex justify-between mt-6">
             <button
                 onClick={() => handleNext(1)}
-                className="px-6 py-3 border border-gray-300 bg-white text-gray-700 font-medium rounded-lg shadow-sm hover:bg-gray-100 transition text-md"
+                className="px-6 py-3 border border-gray-300 bg-white text-gray-700 font-medium rounded-md shadow-sm hover:bg-gray-100 transition text-md"
             >
                 ← Back
             </button>
             <button
                 onClick={() => handleNext(4)}
                 disabled
-                className="px-6 py-3 bg-gray-400 text-white font-medium rounded-lg shadow-md cursor-not-allowed text-md"
+                className="px-6 py-3 bg-gray-400 text-white font-medium rounded-md shadow-md cursor-not-allowed text-md"
             >
                 Process & Continue
             </button>
@@ -174,7 +174,7 @@ const Step3ManualEntry = React.memo(({
                 />
 
                 <div className="lg:col-span-2">
-                    <div className="p-6 rounded-lg border border-gray-200 bg-gray-50 mb-6">
+                    <div className="p-6 rounded-md border border-gray-200 bg-gray-50 mb-6">
                         <h3 className="font-bold text-lg text-gray-800 mb-4 border-b pb-2">Phone Numbers Validation Preview</h3>
 
                         {processedResults.length === 0 ? (
@@ -184,14 +184,14 @@ const Step3ManualEntry = React.memo(({
                         ) : (
                             <>
                                 <div className="grid grid-cols-2 gap-4 mb-4">
-                                    <div className="bg-green-100 p-4 rounded-lg flex items-center justify-between shadow-sm">
+                                    <div className="bg-green-100 p-4 rounded-md flex items-center justify-between shadow-sm">
                                         <span className="text-md font-semibold text-green-700 flex items-center">
                                             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                             Valid Numbers (সঠিক)
                                         </span>
                                         <span className="text-2xl font-extrabold text-green-800">{validCount}</span>
                                     </div>
-                                    <div className="bg-red-100 p-4 rounded-lg flex items-center justify-between shadow-sm">
+                                    <div className="bg-red-100 p-4 rounded-md flex items-center justify-between shadow-sm">
                                         <span className="text-md font-semibold text-red-700 flex items-center">
                                             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                             Invalid Numbers (ভুল)
@@ -206,7 +206,7 @@ const Step3ManualEntry = React.memo(({
                                     </div>
                                 )}
 
-                                <div className="overflow-x-auto max-h-64 border rounded-lg">
+                                <div className="overflow-x-auto max-h-64 border rounded-md">
                                     <table className="min-w-full divide-y divide-gray-200">
                                         <thead className="bg-gray-200 sticky top-0">
                                             <tr>
@@ -241,14 +241,14 @@ const Step3ManualEntry = React.memo(({
                     <div className="flex justify-between">
                         <button
                             onClick={() => handleNext(1)}
-                            className="px-6 py-3 border border-gray-300 bg-white text-gray-700 font-medium rounded-lg shadow-sm hover:bg-gray-100 transition text-md"
+                            className="px-6 py-3 border border-gray-300 bg-white text-gray-700 font-medium rounded-md shadow-sm hover:bg-gray-100 transition text-md"
                         >
                             ← Back
                         </button>
                         <button
                             onClick={() => handleNext(4)}
                             disabled={invalidCount > 0 || processedResults.length === 0}
-                            className={`px-6 py-3 font-medium rounded-lg shadow-md text-md transition duration-150 ease-in-out ${(invalidCount > 0 || processedResults.length === 0) ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-indigo-600 text-white hover:bg-indigo-700'}`}
+                            className={`px-6 py-3 font-medium rounded-md shadow-md text-md transition duration-150 ease-in-out ${(invalidCount > 0 || processedResults.length === 0) ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-indigo-600 text-white hover:bg-indigo-700'}`}
                         >
                             Continue to Message Composer
                         </button>
@@ -290,7 +290,7 @@ const Step4MessageComposer = React.memo(({
                         rows="8"
                         value={message}
                         onChange={onMessageChange}
-                        className="w-full p-4 border border-gray-300 rounded-lg shadow-inner focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 resize-none text-md"
+                        className="w-full p-4 border border-gray-300 rounded-md shadow-inner focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 resize-none text-md"
                         placeholder="Type your message here..."
                         disabled={isSending}
                     ></textarea>
@@ -323,14 +323,14 @@ const Step4MessageComposer = React.memo(({
                     </div>
 
                     {sendSuccess && (
-                        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg relative mb-4" role="alert">
+                        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-md relative mb-4" role="alert">
                             <strong className="font-bold">Success!</strong>
                             <span className="block sm:inline"> Mock SMS sent to {validCount} recipients.</span>
                         </div>
                     )}
 
                     {validCount === 0 && (
-                        <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded-lg relative mb-4" role="alert">
+                        <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded-md relative mb-4" role="alert">
                             <span className="block sm:inline">No valid numbers to send. Go back to Step 2.</span>
                         </div>
                     )}
@@ -338,7 +338,7 @@ const Step4MessageComposer = React.memo(({
                     <button
                         onClick={onSend}
                         disabled={isSendDisabled}
-                        className={`w-full px-8 py-3 font-medium rounded-lg shadow-xl transition text-md flex justify-center items-center ${isSendDisabled ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-green-600 text-white hover:bg-green-700'}`}
+                        className={`w-full px-8 py-3 font-medium rounded-md shadow-xl transition text-md flex justify-center items-center ${isSendDisabled ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-green-600 text-white hover:bg-green-700'}`}
                     >
                         {isSending ? (
                             <>

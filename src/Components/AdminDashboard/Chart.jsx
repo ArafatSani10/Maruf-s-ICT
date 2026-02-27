@@ -13,21 +13,21 @@ const Chart = () => {
 
           {/* Revenue Cards */}
           <div className="grid sm:grid-cols-3 gap-4 mb-4">
-            <div className="p-4 bg-gray-50 border rounded-lg flex flex-col items-center">
+            <div className="p-4 bg-gray-50 border rounded-md flex flex-col items-center">
               <p className="text-sm text-gray-600">Total Revenue</p>
               <h3 className="text-2xl font-bold text-gray-900">৳0</h3>
               <span className="mt-1 text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
                 Total: ৳0
               </span>
             </div>
-            <div className="p-4 bg-gray-50 border rounded-lg flex flex-col items-center">
+            <div className="p-4 bg-gray-50 border rounded-md flex flex-col items-center">
               <p className="text-sm text-gray-600">Expected Revenue</p>
               <h3 className="text-2xl font-bold text-gray-900">৳0</h3>
               <span className="mt-1 text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">
                 0 students
               </span>
             </div>
-            <div className="p-4 bg-gray-50 border rounded-lg flex flex-col items-center">
+            <div className="p-4 bg-gray-50 border rounded-md flex flex-col items-center">
               <p className="text-sm text-gray-600">Outstanding Due (Active Only)</p>
               <h3 className="text-2xl font-bold text-red-600">৳0</h3>
               <span className="mt-1 text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full">
@@ -106,13 +106,13 @@ const Chart = () => {
 
           {/* Insights */}
           <div className="grid sm:grid-cols-2 gap-4 mt-5">
-            <div className="bg-gray-50 border rounded-lg p-3">
+            <div className="bg-gray-50 border rounded-md p-3">
               <p className="text-xs text-gray-500">Most Popular</p>
               <p className="text-sm font-semibold text-gray-800 mt-1">
                 inter1st (11 students)
               </p>
             </div>
-            <div className="bg-gray-50 border rounded-lg p-3">
+            <div className="bg-gray-50 border rounded-md p-3">
               <p className="text-xs text-gray-500">Growth Potential</p>
               <p className="text-sm font-semibold text-gray-800 mt-1">
                 inter2nd (6 students)

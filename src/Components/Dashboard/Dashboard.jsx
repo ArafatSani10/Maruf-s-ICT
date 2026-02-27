@@ -1,38 +1,32 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-
-// --- React Icons Placeholders (Assumes react-icons/fa is installed) ---
 import {
-    FaChartBar,
-    FaUsers,
-    FaUserPlus,
-    FaBook,
-    FaTimes,
-    FaDollarSign,
-    FaHome,
-    FaCog,
-    FaRegArrowAltCircleLeft,
-    FaBars,
-    FaClock,
-    FaCalendarAlt,
-    FaSignOutAlt,
-    FaBell,
-    FaUserCircle,
-    FaChevronDown,
-    FaRegArrowAltCircleRight,
-    FaClipboardList,
-    FaMoneyBillWave,
-    FaSitemap, // For Module/Structure
-    FaCalendarCheck // For Attendance
+    FaChartBar, FaUsers, FaUserPlus, FaBook, FaHome, FaCog,
+    FaRegArrowAltCircleLeft, FaBars, FaClock, FaCalendarAlt, FaSignOutAlt,
+    FaBell, FaUserCircle, FaChevronDown, FaRegArrowAltCircleRight,
+    FaClipboardList, FaMoneyBillWave, FaSitemap, FaCalendarCheck, FaLink
 } from 'react-icons/fa';
 
-// --- Dropdown Menu Component ---
+const SkeletonLoader = () => (
+    <div className="space-y-6 animate-pulse">
+        <div className="flex justify-between items-center">
+            <div className="h-8 bg-gray-200 rounded-sm w-48"></div>
+            <div className="h-8 bg-gray-200 rounded-sm w-32"></div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="h-28 bg-gray-200 rounded-sm"></div>
+            ))}
+        </div>
+        <div className="h-80 bg-gray-100 rounded-sm w-full"></div>
+    </div>
+);
+
 const UserDropdown = ({ user, onLogout }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
 
-    // Close dropdown when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -41,82 +35,36 @@ const UserDropdown = ({ user, onLogout }) => {
         };
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, [dropdownRef]);
-
-    const handleLinkClick = (action) => {
-        setIsOpen(false);
-        if (action === 'logout') {
-            onLogout();
-        }
-    };
-
-    const dropdownItems = [
-        { label: "Profile", Icon: FaUserCircle, action: "/dashboard/profile" },
-        { label: "Settings", Icon: FaCog, action: "/dashboard/settings" },
-    ];
+    }, []);
 
     return (
         <div className="relative z-50" ref={dropdownRef}>
-            {/* User Profile Button - Clickable to open dropdown */}
-            <motion.button
+            <button
                 onClick={() => setIsOpen(!isOpen)}
-                whileHover={{ scale: 1.02 }}
-                className="flex items-center space-x-3 bg-gray-50 hover:bg-gray-100 rounded-full p-1.5 cursor-pointer transition-colors"
+                className="flex items-center space-x-3 bg-white border border-slate-200 rounded-md p-1.5 hover:border-blue-300 transition-all active:scale-95 shadow-sm"
             >
-                <img
-                    src={user.photoURL}
-                    alt={user.displayName}
-                    className="w-8 h-8 rounded-full object-cover border-2 border-blue-500 shadow-sm"
-                />
-                <div className="hidden lg:block text-left pr-2">
-                    <p className="text-sm font-semibold text-gray-900 leading-none">
-                        {user.displayName.split(" ")[0]}
-                    </p>
-                    <p className="text-xs text-gray-500">
-                        Administrator
-                    </p>
+                <img src={user.photoURL} alt="User" className="w-8 h-8 rounded-sm object-cover" />
+                <div className="hidden lg:block text-left pr-1 ">
+                    <p className="text-[12px] font-bold text-slate-800">{user.displayName}</p>
+                    <p className="text-[9px] text-blue-600 font-semibold uppercase">Administrator</p>
                 </div>
-                <FaChevronDown className={`w-3 h-3 text-gray-400 hidden lg:block transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'}`} />
-            </motion.button>
-
-            {/* Dropdown Content */}
+                <FaChevronDown className={`w-2.5 h-2.5 text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+            </button>
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute right-0 mt-3 w-60 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden"
+                        initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                        className="absolute right-0 mt-2 w-52 bg-white rounded-sm shadow-2xl border border-slate-100 p-1.5 origin-top-right overflow-hidden"
                     >
-                        <div className="p-4 border-b border-gray-100">
-                            <p className="text-sm font-semibold text-gray-900">{user.displayName}</p>
-                            <p className="text-xs text-blue-600">{user.email}</p>
-                        </div>
-
-                        <div className="py-1">
-                            {dropdownItems.map((item) => (
-                                <Link
-                                    key={item.label}
-                                    to={item.action}
-                                    onClick={() => handleLinkClick(item.action)}
-                                    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
-                                >
-                                    <item.Icon className="w-4 h-4 mr-3" />
-                                    {item.label}
-                                </Link>
-                            ))}
-                        </div>
-
-                        <div className="border-t border-gray-100 py-1">
-                            <button
-                                onClick={() => handleLinkClick('logout')}
-                                className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
-                            >
-                                <FaSignOutAlt className="w-4 h-4 mr-3" />
-                                Sign Out
-                            </button>
-                        </div>
+                        <Link to="/dashboard/settings" className="flex items-center w-full px-4 py-3 text-[13px] font-bold text-slate-600 hover:bg-slate-50 rounded-sm transition-colors group">
+                            <FaUserCircle className="mr-3 text-slate-400 group-hover:text-blue-500" size={16} /> My Profile
+                        </Link>
+                        <div className="h-[1px] bg-slate-100 my-1 mx-2"></div>
+                        <button onClick={onLogout} className="flex items-center w-full px-4 py-3 text-[13px] font-bold text-red-500 hover:bg-red-50 rounded-sm transition-colors group">
+                            <FaSignOutAlt className="mr-3 opacity-70" size={16} /> Sign Out
+                        </button>
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -124,464 +72,189 @@ const UserDropdown = ({ user, onLogout }) => {
     );
 };
 
-// --- Component Start ---
+const NavGroup = ({ title, items, location, isSidebarExpanded }) => {
+    const [isCollapsed, setIsCollapsed] = useState(false);
+
+    return (
+        <div className="mb-6 px-4">
+            {isSidebarExpanded && (
+                <button
+                    onClick={() => setIsCollapsed(!isCollapsed)}
+                    className="flex items-center justify-between w-full mb-3 group outline-none"
+                >
+                    <span className="text-[10px] font-semibold text-gray-900 ">{title}</span>
+                    <FaChevronDown className={`w-2 h-2 text-gray-900 transition-transform duration-300 ${isCollapsed ? '-rotate-90' : ''}`} />
+                </button>
+            )}
+            <AnimatePresence initial={false}>
+                {!isCollapsed && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="space-y-1 overflow-hidden"
+                    >
+                        {items.map((item) => {
+                            const isActive = location.pathname === item.path;
+                            return (
+                                <Link
+                                    key={item.path}
+                                    to={item.path}
+                                    className={`flex items-center p-2 rounded-sm transition-all duration-200 group ${isActive ? 'bg-blue-600 text-white shadow-sm shadow-blue-100' : 'text-gray-500 hover:bg-blue-50 hover:text-blue-700'
+                                        }`}
+                                >
+                                    <item.Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-white' : 'text-gray-400 group-hover:text-blue-600'}`} />
+                                    {isSidebarExpanded && (
+                                        <span className="ml-3 text-xs font-bold truncate">{item.label}</span>
+                                    )}
+                                </Link>
+                            );
+                        })}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+};
 
 const Dashboard = () => {
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-
-    const location = useLocation();
     const [isLoading, setIsLoading] = useState(true);
     const [currentDateTime, setCurrentDateTime] = useState(new Date());
+    const location = useLocation();
 
     const mockUser = {
-        displayName: "Admin User",
-        email: "admin@edumaster.com",
-        photoURL: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face"
+        displayName: "Maruf Admin",
+        photoURL: "https://i.ibb.co.com/mrGbBCtq/511017443-1126095552869235-1406722978156443780-n.jpg"
     };
 
-    // --- Responsive Logic Fix ---
     useEffect(() => {
-        document.documentElement.classList.remove('dark');
-
-        // Initial desktop check
-        if (window.innerWidth >= 768) {
-            setSidebarOpen(true);
-        } else {
-            setSidebarOpen(false);
-        }
-
-        // Window Resize Listener to handle screen size change without reload
-        const handleResize = () => {
-            if (window.innerWidth >= 768) {
-                setSidebarOpen(true);
-                setMobileSidebarOpen(false);
-            } else {
-                setSidebarOpen(false);
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        // Time and Loading
-        const timeInterval = setInterval(() => setCurrentDateTime(new Date()), 1000);
-        const loadTimer = setTimeout(() => setIsLoading(false), 1200);
-
-        return () => {
-            clearTimeout(loadTimer);
-            clearInterval(timeInterval);
-            window.removeEventListener('resize', handleResize);
-        };
+        const timer = setTimeout(() => setIsLoading(false), 1200);
+        const interval = setInterval(() => setCurrentDateTime(new Date()), 1000);
+        return () => { clearTimeout(timer); clearInterval(interval); };
     }, []);
 
-    useEffect(() => {
-        setMobileSidebarOpen(false);
-    }, [location.pathname]);
-
-    const handleStaticLogout = () => {
-        console.log("Static Logout initiated.");
-        // Redirect to login page logic here
+    const navSections = {
+        "CORE MANAGEMENT": [
+            { path: '/dashboard/Admin-home', Icon: FaChartBar, label: 'Dashboard' },
+            { path: '/dashboard/batch', Icon: FaUsers, label: 'Batch' },
+            { path: '/dashboard/enrollment-student', Icon: FaUserPlus, label: 'Students' },
+            { path: '/dashboard/module', Icon: FaSitemap, label: 'Course Modules' },
+        ],
+        "SYSTEM OPERATIONS": [
+            { path: '/dashboard/attendance', Icon: FaCalendarCheck, label: 'Attendance' },
+            { path: '/dashboard/books', Icon: FaBook, label: 'Books' },
+            { path: '/dashboard/notice', Icon: FaBell, label: 'Notice' },
+            { path: '/dashboard/Bulk-SMS', Icon: FaClipboardList, label: 'Bulk Messaging' },
+        ],
+        "QUICK ACCESS": [
+            { path: '/', Icon: FaHome, label: 'Live Website' },
+            { path: '/dashboard/settings', Icon: FaCog, label: 'Settings' },
+            { path: '/dashboard/subscription', Icon: FaLink, label: 'Subscription' },
+        ]
     };
-
-    const getNavItemClasses = (path) => {
-        const isActive = location.pathname === path;
-        const baseClasses = 'group relative flex items-center p-3 rounded-lg transition-all duration-200 overflow-hidden';
-        const activeClasses = 'bg-blue-600 text-white shadow-md shadow-blue-500/30';
-        const inactiveClasses = 'text-gray-700 hover:bg-blue-50 hover:text-blue-700';
-        return `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`;
-    };
-
-    const navItems = [
-        {
-            path: '/dashboard/Admin-home',
-            Icon: FaChartBar,
-            label: 'Dashboard Overview',
-            badge: null
-        },
-        {
-            path: '/dashboard/batch',
-            Icon: FaUsers,
-            label: 'Batch',
-        },
-
-        {
-            path: '/dashboard/enrollment-student',
-            Icon: FaUserPlus,
-            label: 'Enroll Student',
-        },
-
-        {
-            path: '/dashboard/id-card',
-            Icon: FaUserPlus,
-            label: 'ID Card',
-        },
-        {
-            path: '/dashboard/module',
-            Icon: FaSitemap,
-            label: 'Module',
-            badge: null
-        },
-        {
-            path: '/dashboard/books',
-            Icon: FaBook,
-            label: 'Books',
-        },
-        {
-            path: '/dashboard/attendance',
-            Icon: FaCalendarCheck,
-            label: 'Attendance',
-        },
-        {
-            path: '/dashboard/expense',
-            Icon: FaMoneyBillWave,
-            label: 'Expense',
-        },
-        {
-            path: '/dashboard/landing-setting',
-            Icon: FaMoneyBillWave,
-            label: 'Cp',
-        },
-        {
-            path: '/dashboard/sms-template',
-            Icon: FaClipboardList,
-            label: 'SMS Template',
-        },
-
-
-        {
-            path: '/dashboard/Bulk-SMS',
-            Icon: FaUsers,
-            label: 'Bulk SMS',
-        },
-
-        {
-            path: '/dashboard/notice',
-            Icon: FaUsers,
-            label: 'Notice',
-        },
-
-        {
-            path: '/dashboard/subscription',
-            Icon: FaUsers,
-            label: 'Subscription',
-        },
-
-    ];
-
-    const quickLinks = [
-        { path: '/', Icon: FaHome, label: 'Back to Home' },
-        // Settings is now handled by the Dropdown, keep for sidebar for consistency
-        { path: '/dashboard/settings', Icon: FaCog, label: 'Settings' },
-    ];
-
-    const isDesktop = window.innerWidth >= 768;
-    const isSidebarExpanded = isDesktop ? sidebarOpen : mobileSidebarOpen;
-
-    if (isLoading) {
-        return (
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="flex flex-col items-center space-y-6"
-                >
-                    <motion.div
-                        animate={{
-                            rotate: 360,
-                            scale: [1, 1.2, 1]
-                        }}
-                        transition={{
-                            rotate: { duration: 2, repeat: Infinity, ease: "linear" },
-                            scale: { duration: 1.5, repeat: Infinity }
-                        }}
-                        className="w-20 h-20 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg"
-                    >
-                        <span className="text-2xl text-white font-bold">EM</span>
-                    </motion.div>
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.3 }}
-                        className="text-gray-600 font-medium text-lg"
-                    >
-                        Loading your Admin Panel...
-                    </motion.p>
-                </motion.div>
-            </div>
-        );
-    }
 
     return (
-        <div className="flex h-screen font-sans bg-white overflow-hidden">
-            {/* Mobile Overlay */}
+        <div className="flex h-screen bg-[#f1f5f9] overflow-hidden font-sans">
             <AnimatePresence>
                 {mobileSidebarOpen && (
                     <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-black bg-opacity-40 z-40 md:hidden"
+                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                         onClick={() => setMobileSidebarOpen(false)}
+                        className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 md:hidden"
                     />
                 )}
             </AnimatePresence>
 
-            {/* Sidebar (Modern Software Look) */}
-            <motion.div
+            <motion.aside
                 initial={false}
                 animate={{
-                    width: isDesktop ? (sidebarOpen ? 280 : 80) : (mobileSidebarOpen ? 280 : 0),
-                    x: isDesktop ? 0 : (mobileSidebarOpen ? 0 : -280)
+                    width: sidebarOpen ? 280 : 80,
+                    x: (typeof window !== 'undefined' && window.innerWidth < 768 && !mobileSidebarOpen) ? -280 : 0
                 }}
-                transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className={`fixed md:relative z-50 bg-white shadow-2xl md:shadow-lg border-r border-gray-200 h-full flex flex-col overflow-hidden ${!isSidebarExpanded && isDesktop ? 'items-center' : ''}`}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                className="fixed md:relative z-50 bg-white border-r border-slate-200 h-full flex flex-col shadow-sm"
             >
-                {/* Sidebar Header - Updated for Logo */}
-                <div className={`flex items-center ${isSidebarExpanded ? 'justify-between px-6' : 'justify-center'} p-4 border-b border-gray-200 min-h-[80px]`}>
-                    <AnimatePresence>
-                        {isSidebarExpanded && (
-                            <motion.div
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
-                                className="flex items-center space-x-3 origin-left"
-                            >
-                                {/* Expanded Logo and Text */}
-                                <motion.div
-                                    whileHover={{ scale: 1.05 }}
-                                    className="w-10 h-10 rounded-lg overflow-hidden shadow-md shadow-blue-500/30"
-                                >
-                                    {/* Your Logo Image (W-10 H-10, Object-cover ensures fit) */}
-                                    <img
-                                        className='w-full h-full object-cover'
-                                        src="https://i.ibb.co.com/mrGbBCtq/511017443-1126095552869235-1406722978156443780-n.jpg"
-                                        alt="EduMaster Logo"
-                                    />
-                                </motion.div>
-                                <div>
-                                    <h1 className="text-lg font-bold text-gray-900 leading-none">Maruf's Ict Care</h1>
-                                    <p className="text-xs text-blue-600 font-medium">Admin Panel</p>
-                                </div>
+                <div className="h-20 flex items-center justify-between px-5 border-b border-slate-100 flex-shrink-0">
+                    <div className="flex items-center space-x-3 overflow-hidden">
+                        <div className="w-9 h-9 bg-blue-600 rounded-sm flex items-center justify-center text-white font-black shadow-lg shadow-blue-100 flex-shrink-0">M</div>
+                        {sidebarOpen && (
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="truncate">
+                                <h1 className="text-xs font-black  ">Maruf's ICT</h1>
+                                <p className="text-[9px] text-blue-600 font-bold ">Dashboard</p>
                             </motion.div>
                         )}
-
-                        {/* Collapsed Logo (Only the Image/Icon) */}
-                        {!isSidebarExpanded && isDesktop && (
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="w-10 h-10 rounded-lg overflow-hidden hidden shadow-md shadow-blue-500/30"
-                            >
-                                <img
-                                    className='w-full h-full object-cover'
-                                    src="https://i.ibb.co.com/mrGbBCtq/511017443-1126095552869235-1406722978156443780-n.jpg"
-                                    alt="EM"
-                                />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-
-                    {/* Modern Collapse/Expand Button */}
-                    {isDesktop && (
-                        <motion.button
-                            whileHover={{ scale: 1.1, rotate: sidebarOpen ? 0 : 360 }}
-                            whileTap={{ scale: 0.9 }}
-                            onClick={() => setSidebarOpen(!sidebarOpen)}
-                            className={`p-2 rounded-full transition-all duration-300 ${sidebarOpen ? 'bg-gray-200 hover:bg-gray-300' : 'bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-500/50'}`}
-                            title={sidebarOpen ? "Collapse Sidebar" : "Expand Sidebar"}
-                        >
-                            {sidebarOpen ?
-                                <FaRegArrowAltCircleLeft className="w-5 h-5 text-gray-700" /> :
-                                <FaRegArrowAltCircleRight className="w-5 h-5 text-white" />
-                            }
-                        </motion.button>
-                    )}
-
-                    {/* Mobile Close Button */}
-                    {!isDesktop && (
-                        <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            onClick={() => setMobileSidebarOpen(false)}
-                            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
-                        >
-                            <FaTimes className="w-5 h-5 text-gray-600" />
-                        </motion.button>
-                    )}
+                    </div>
+                    <button
+                        onClick={() => setSidebarOpen(!sidebarOpen)}
+                        className="hidden md:block p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-sm transition-all"
+                    >
+                        {sidebarOpen ? <FaRegArrowAltCircleLeft size={18} /> : <FaRegArrowAltCircleRight size={18} />}
+                    </button>
                 </div>
-                {/* Navigation */}
-                <nav className="flex-1 p-4 space-y-1 overflow-y-auto scrollbar-hidden">
-                    <AnimatePresence>
-                        {isSidebarExpanded && (
-                            <motion.p
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -10 }}
-                                className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3"
-                            >
-                                MAIN MENU
-                            </motion.p>
-                        )}
-                    </AnimatePresence>
 
-                    {navItems.map((item) => (
-                        <motion.div key={item.path} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                            <Link to={item.path} className={getNavItemClasses(item.path)}>
-                                <span className={`relative z-10 transition-colors duration-200 ${location.pathname === item.path ? 'text-white' : 'text-gray-500 group-hover:text-blue-700'}`}>
-                                    <item.Icon className="w-5 h-5" />
-                                </span>
-                                <AnimatePresence>
-                                    {isSidebarExpanded && (
-                                        <motion.div
-                                            initial={{ opacity: 0, x: -10 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: -10 }}
-                                            className="relative z-10 flex items-center justify-between flex-1 ml-4"
-                                        >
-                                            <span className={`font-medium text-sm transition-colors ${location.pathname === item.path ? 'text-white' : 'text-gray-700'}`}>{item.label}</span>
-                                            {item.badge && (
-                                                <span className={`px-2 py-0.5 text-xs rounded-full font-bold transition-all duration-300 ${location.pathname === item.path ?
-                                                    'bg-white text-blue-600' :
-                                                    'bg-gray-200 text-gray-600 group-hover:bg-blue-200'
-                                                    }`}>
-                                                    {item.badge}
-                                                </span>
-                                            )}
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </Link>
-                        </motion.div>
+                <div className="flex-1 overflow-y-auto overflow-x-hidden py-5 custom-scrollbar scroll-smooth">
+                    {Object.entries(navSections).map(([title, items]) => (
+                        <NavGroup
+                            key={title}
+                            title={title}
+                            items={items}
+                            location={location}
+                            isSidebarExpanded={sidebarOpen}
+                        />
                     ))}
+                </div>
+            </motion.aside>
 
-                    {/* SYSTEM and Logout section removed from footer, placed in main navigation */}
-                    <div className="pt-6 mt-6 border-t border-gray-200 space-y-1">
-                        <AnimatePresence>
-                            {isSidebarExpanded && (
-                                <motion.p
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -10 }}
-                                    className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3"
-                                >
-                                    SYSTEM
-                                </motion.p>
-                            )}
-                        </AnimatePresence>
-
-                        {quickLinks.map((item) => (
-                            <motion.div key={item.path} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                                <Link to={item.path} className={getNavItemClasses(item.path)}>
-                                    <span className={`relative z-10 transition-colors duration-200 ${location.pathname === item.path ? 'text-white' : 'text-gray-500 group-hover:text-blue-700'}`}>
-                                        <item.Icon className="w-5 h-5" />
-                                    </span>
-                                    <AnimatePresence>
-                                        {isSidebarExpanded && (
-                                            <motion.div
-                                                initial={{ opacity: 0, x: -10 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                exit={{ opacity: 0, x: -10 }}
-                                                className="relative z-10 flex-1 ml-4"
-                                            >
-                                                <span className={`font-medium text-sm transition-colors ${location.pathname === item.path ? 'text-white' : 'text-gray-700'}`}>{item.label}</span>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </Link>
-                            </motion.div>
-                        ))}
-                    </div>
-                </nav>
-            </motion.div>
-
-            {/* Main Content Area */}
-            <div className="flex-1 flex flex-col min-w-0">
-
-                {/* Main Header/Top Bar (Clean Look) */}
-                <motion.header
-                    initial={{ y: -50, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    className="bg-white shadow-md border-b border-gray-200 p-4 sticky top-0 z-30"
-                >
-                    <div className="flex items-center justify-between h-10"> {/* Added h-10 for consistent height */}
-
-                        <div className="flex items-center space-x-2 sm:space-x-4">
-                            {/* Mobile Menu Button */}
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => setMobileSidebarOpen(true)}
-                                className="md:hidden p-2 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-600"
-                            >
-                                <FaBars className="w-5 h-5" />
-                            </motion.button>
-
-                            {/* Time & Date Display (Responsive) */}
-                            <motion.div
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.2 }}
-                                // Fixed: bg-gray-100 ক্লাসটি এখানে ফিরিয়ে আনা হলো, যা দেখতে সুন্দর লাগে
-                                className="flex items-center p-2 px-3 bg-gray-100 rounded-full min-w-0"
-                            >
-                                {/* ... (Time and Date content remains the same) ... */}
-                                <div className="flex items-center text-sm font-medium text-gray-700 truncate">
-                                    <FaClock className="w-4 h-4 text-blue-500 mr-2 sm:mr-0" />
-                                    <span className="truncate">
-                                        {currentDateTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
-                                    </span>
-                                </div>
-
-                                {/* Full Date and Time separator on small screens and above */}
-                                <div className="hidden sm:flex items-center space-x-2 text-sm font-medium text-gray-700 border-l border-gray-300 pl-3 ml-3">
-                                    <FaCalendarAlt className="w-4 h-4 text-blue-500" />
-                                    <span>
-                                        {currentDateTime.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
-                                    </span>
-                                </div>
-                            </motion.div>
-                        </div>
-
-                        {/* User Profile Section (Right Side) */}
-                        <div className="flex items-center space-x-2 sm:space-x-4">
-                            {/* Notifications */}
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="relative p-2 sm:p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
-                            >
-                                <FaBell className="w-5 h-5 text-gray-600" />
-                                <span className="absolute top-1 right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></span>
-                            </motion.button>
-
-                            {/* User Profile with Dropdown */}
-                            <UserDropdown user={mockUser} onLogout={handleStaticLogout} />
+            <div className="flex-1 flex flex-col min-w-0 h-full relative">
+                <header className="h-20 bg-white/80 backdrop-blur-md border-b border-slate-200 flex items-center justify-between px-6 sticky top-0 z-30">
+                    <div className="flex items-center space-x-4">
+                        <button onClick={() => setMobileSidebarOpen(true)} className="md:hidden p-2 text-slate-600 bg-slate-100 rounded-sm"><FaBars /></button>
+                        <div className="hidden sm:flex items-center bg-slate-50 px-4 py-2 rounded-sm border border-slate-100 space-x-4">
+                            <div className="flex items-center space-x-2 border-r border-slate-200 pr-4 text-blue-600">
+                                <FaClock size={12} />
+                                <span className="text-xs font-black ">{currentDateTime.toLocaleTimeString()}</span>
+                            </div>
+                            <div className="flex items-center space-x-2 text-slate-500">
+                                <FaCalendarAlt size={12} />
+                                <span className="text-xs font-semibold ">{currentDateTime.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                            </div>
                         </div>
                     </div>
-                </motion.header>
 
-                {/* Content Area */}
-                {/* Fixed: flex-1 ensures it takes all available height, overflow-y-auto ensures content scrolls */}
-                <main className="flex-1 overflow-y-auto bg-gray-50">
-                    <div className="p-6 lg:p-8 h-full">
-                        <AnimatePresence mode="wait">
+                    <div className="flex items-center space-x-4">
+                        <button className="relative p-2 text-slate-400 hover:text-blue-600 transition-colors group">
+                            <FaBell />
+                            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white group-hover:scale-110 transition-transform"></span>
+                        </button>
+                        <div className="w-[1px] h-6 bg-slate-200 mx-1"></div>
+                        <UserDropdown user={mockUser} onLogout={() => { }} />
+                    </div>
+                </header>
+
+                <main className="flex-1 overflow-y-auto bg-[#f8fafc] scroll-smooth">
+                    <div className="p-3 lg:p-5 max-w-[1600px] mx-auto min-h-full">
+                        {isLoading ? <SkeletonLoader /> : (
                             <motion.div
-                                key={location.pathname}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 15 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
+                                transition={{ duration: 0.4 }}
                                 className="h-full"
                             >
                                 <Outlet />
                             </motion.div>
-                        </AnimatePresence>
+                        )}
                     </div>
                 </main>
             </div>
 
+            <style jsx>{`
+                .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+                .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+                .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
+            `}</style>
         </div>
     );
 };

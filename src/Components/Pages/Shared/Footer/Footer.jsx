@@ -69,7 +69,7 @@ const Footer = () => {
                             {/* Register Now Button (Green) */}
                             <a 
                                 href="#" 
-                                className="inline-block w-full py-3 px-6 text-white font-medium text-center rounded-lg transition duration-300 
+                                className="inline-block w-full py-3 px-6 text-white font-medium text-center rounded-md transition duration-300 
                                 bg-green-500 hover:bg-green-600 shadow-md shadow-green-500/30"
                                 style={{ backgroundColor: '#20B95B' }} // Use exact green from the image
                             >
@@ -78,7 +78,7 @@ const Footer = () => {
                             {/* Student Login Button (Dark/Bordered) */}
                             <a 
                                 href="#" 
-                                className="inline-block w-full py-3 px-6 text-white font-medium text-center rounded-lg transition duration-300 
+                                className="inline-block w-full py-3 px-6 text-white font-medium text-center rounded-md transition duration-300 
                                 border border-gray-600 hover:bg-gray-700"
                                 style={{ backgroundColor: '#182436' }} // Use exact background for the button
                             >

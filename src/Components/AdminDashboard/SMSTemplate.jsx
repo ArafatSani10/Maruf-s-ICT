@@ -50,7 +50,7 @@ const NewSMSTemplateModal = ({ isOpen, onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg shadow-xl w-full max-w-lg">
+            <div className="bg-white rounded-md shadow-xl w-full max-w-lg">
                 <div className="flex justify-between items-center p-5 border-b border-gray-200">
                     <h2 className="text-xl font-semibold text-gray-800">New SMS Template</h2>
                     <button onClick={onClose} className="text-gray-400 hover:text-gray-600 transition">
@@ -199,7 +199,7 @@ const SMSTemplate = () => {
             </p>
             <button
                 onClick={handleAddTemplateClick}
-                className="mt-6 flex items-center mx-auto px-4 py-2 bg-green-600 text-white font-medium rounded-lg shadow-md hover:bg-green-700 transition duration-150 ease-in-out text-sm"
+                className="mt-6 flex items-center mx-auto px-4 py-2 bg-green-600 text-white font-medium rounded-md shadow-md hover:bg-green-700 transition duration-150 ease-in-out text-sm"
             >
                 <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                 Add Template
@@ -212,7 +212,7 @@ const SMSTemplate = () => {
             <div className="mb-6 flex justify-end">
                 <button
                     onClick={handleAddTemplateClick}
-                    className="flex items-center px-4 py-2 bg-green-600 text-white font-medium rounded-lg shadow-md hover:bg-green-700 transition duration-150 ease-in-out text-sm"
+                    className="flex items-center px-4 py-2 bg-green-600 text-white font-medium rounded-md shadow-md hover:bg-green-700 transition duration-150 ease-in-out text-sm"
                 >
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                     Add Template

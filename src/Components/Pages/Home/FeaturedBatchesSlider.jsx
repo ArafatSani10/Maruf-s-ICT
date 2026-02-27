@@ -158,7 +158,7 @@ const FeaturedBatchesSlider = () => {
                                     </div>
 
                                     {/* Schedule */}
-                                    <div className="flex items-start gap-3 text-sm text-gray-300 mb-5 p-3 bg-white/5 rounded-lg">
+                                    <div className="flex items-start gap-3 text-sm text-gray-300 mb-5 p-3 bg-white/5 rounded-md">
                                         <Clock className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
                                         <div>
                                             <p className="font-semibold text-white mb-1">Class Schedule</p>
