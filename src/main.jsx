@@ -30,6 +30,7 @@ import RegistrationForm from './Components/Pages/Login/RegistrationForm.jsx';
 import AdminHome from './Components/AdminDashboard/AdminHome/AdminHome.jsx';
 import BatchDashboard from './Components/AdminDashboard/Batch/BatchDashboard.jsx';
 import StudentTable from './Components/AdminDashboard/students/StudentTable.jsx';
+import Courses from './Components/AdminDashboard/Courses/Courses.jsx';
 
 const router = createBrowserRouter([
   {
@@ -95,6 +96,12 @@ const router = createBrowserRouter([
       {
         path: 'enrollment-student',
         element: <StudentTable></StudentTable>
+      },
+
+      {
+        path:'courses',
+        element:<Courses></Courses>
+        
       },
 
       {

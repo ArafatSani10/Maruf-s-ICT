@@ -140,6 +140,7 @@ const Dashboard = () => {
             { path: '/dashboard/Admin-home', Icon: FaChartBar, label: 'Dashboard' },
             { path: '/dashboard/batch', Icon: FaUsers, label: 'Batch' },
             { path: '/dashboard/enrollment-student', Icon: FaUserPlus, label: 'Students' },
+            { path: '/dashboard/courses', Icon: FaBook, label: 'Courses' },
             { path: '/dashboard/module', Icon: FaSitemap, label: 'Course Modules' },
         ],
         "SYSTEM OPERATIONS": [

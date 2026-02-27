@@ -40,7 +40,7 @@ const studentData = [
     bloodGroup: 'A+',
     address: 'Kushtia, Bangladesh',
     batchClass: 'Sat-7am\nHSC Model Test',
-    fatherName: 'Abdul Khatun',
+    fatherName: 'Abdul Hasan',
     fatherPhone: '01712345678',
     motherName: 'Nasrin Begum',
     motherPhone: '01787654321',
