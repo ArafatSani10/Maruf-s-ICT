@@ -1,223 +1,264 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 
-// --- 1. DUMMY DATA (Screenshot er moto data) ---
+// --- 1. DUMMY DATA (Screenshot-style data) ---
 const DUMMY_BATCHES = [
-  { id: 1, name: 'Sun-4pm', course: 'HSC Model Test', branch: 'Kushtia Branch', fee: 3500, status: 'Active', schedule: ['Sun (4:00PM - 5:00PM)', 'Tue (4:00PM - 5:00PM)', 'Thu (4:00PM - 5:00PM)'], enrollmentDate: 'Oct 22, 2025' },
-
+    {
+        id: 1,
+        name: 'HSC-BATCH-26',
+        course: 'HSC Model Test',
+        fee: 3500,
+        status: 'Active',
+        schedule: ['Sun (4:00PM - 5:00PM)', 'Tue (4:00PM - 5:00PM)', 'Thu (4:00PM - 5:00PM)'],
+        enrollmentDate: 'Oct 22, 2025',
+    },
+    {
+        id: 2,
+        name: 'HSC-BATCH-25',
+        course: 'SSC Preparation',
+        fee: 4200,
+        status: 'Upcoming',
+        schedule: ['Mon (6:00PM - 7:30PM)', 'Wed (6:00PM - 7:30PM)'],
+        enrollmentDate: 'Nov 05, 2025',
+    },
+    {
+        id: 3,
+        name: 'HSC-BATCH-24',
+        course: 'Web Development',
+        fee: 5000,
+        status: 'Completed',
+        schedule: ['Wed (2:00PM - 4:00PM)'],
+        enrollmentDate: 'Sep 10, 2025',
+    },
 ];
 
-// --- 2. BatchCard Component ---
-const BatchCard = ({ batch }) => {
-  // Local state for the toggle button in the card
-  // In a real application, this state should come from the batch object itself (e.g., batch.isVisibleOnLanding)
-  const [isLandingPageVisible, setIsLandingPageVisible] = useState(false);
+// --- 2. EditBatchModal Component ---
+const EditBatchModal = ({ isOpen, onClose, batch, onSubmit }) => {
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+        defaultValues: batch ? { batchName: batch.name, courseTitle: batch.course, courseFee: batch.fee, schedule: batch.schedule.join('\n') } : {},
+    });
 
-  return (
-    <div className="bg-white p-4 rounded-md shadow-md hover:shadow-lg transition duration-300 border border-gray-100">
+    React.useEffect(() => {
+        if (batch) reset({ batchName: batch.name, courseTitle: batch.course, courseFee: batch.fee, schedule: batch.schedule.join('\n') });
+    }, [batch, reset]);
 
-      {/* Card Header (Batch Name & Edit Icon) */}
-      <div className="flex justify-between items-start mb-2">
-        <h3 className="text-xl font-semibold text-gray-800">{batch.name}</h3>
-        <button className="text-gray-400 hover:text-green-500">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-        </button>
-      </div>
+    const onSubmitHandler = (data) => {
+        onSubmit(data);
+        reset();
+        onClose();
+    };
 
-      <p className="text-sm font-medium text-gray-500 mb-3">{batch.course}</p>
+    if (!isOpen) return null;
 
-      {/* Status Tags */}
-      <div className="flex flex-wrap gap-2 text-xs mb-4">
-        <span className="bg-green-100 text-green-800 px-2 py-0.5 rounded-full font-medium">Active</span>
-        <span className="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full font-medium">Mixed</span>
-        <span className="bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full font-medium">Recorded</span>
-        <span className="bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full font-medium">{batch.branch}</span>
-      </div>
+    return (
+        <div className="fixed inset-0 z-[99999] w-screen h-screen flex items-center justify-center overflow-hidden">
+            <div className="absolute inset-0 w-full h-full bg-slate-900/55 backdrop-blur-sm" onClick={onClose} />
+            <div className="relative bg-white w-[95%] max-w-3xl rounded-2xl shadow-2xl flex flex-col max-h-[90vh] border border-gray-100 transform transition-all">
+                <div className="flex justify-between items-center px-6 py-4 bg-gradient-to-r from-indigo-600 to-indigo-500 rounded-t-2xl text-white">
+                    <div className="flex items-center gap-3">
+                        <div className="p-2 bg-white/20 rounded-md">
+                            <svg className="text-white text-lg w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536M9 11l6-6M3 21h6l9-9" /></svg>
+                        </div>
+                        <div>
+                            <h2 className="text-lg font-semibold">Edit Batch</h2>
+                            <p className="text-xs opacity-90">Update batch details and save changes</p>
+                        </div>
+                    </div>
+                    <button onClick={onClose} className="p-2 bg-white/10 hover:bg-white/20 rounded-md transition-all">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
 
-      {/* Details Section */}
-      <div className="space-y-2 text-sm text-gray-700">
-        <div>
-          <p className="font-semibold text-xs text-gray-500 mb-1">Schedule</p>
-          <ul className="list-disc pl-4 text-xs text-gray-600 space-y-0.5">
-            {batch.schedule.map((sch, index) => <li key={index}>{sch}</li>)}
-          </ul>
+                <form onSubmit={handleSubmit(onSubmitHandler)} className="flex-1 overflow-y-auto p-6 space-y-6 bg-gray-50">
+                    <div className="bg-white p-3 rounded-lg border border-gray-100 shadow-sm space-y-4">
+                        <div className="flex flex-col">
+                            <label className="text-xs font-semibold text-gray-500 mb-2">Batch Name *</label>
+                            <div className="relative">
+                                <input {...register('batchName', { required: 'Batch name is required' })} placeholder="HSC-BATCH-2026" className={`w-full p-3 pl-2 border ${errors.batchName ? 'border-red-400' : 'border-gray-200'} rounded-lg text-sm focus:ring-2 focus:ring-indigo-200 outline-none transition-all bg-gray-50`} />
+                                {errors.batchName && <p className="text-xs text-red-500 mt-1">{errors.batchName.message}</p>}
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col">
+                            <label className="text-xs font-semibold text-gray-500 mb-2">Course Title *</label>
+                            <div className="relative">
+                                <select {...register('courseTitle', { required: 'Please select a course' })} className={`w-full p-3 p-3 border ${errors.courseTitle ? 'border-red-400' : 'border-gray-200'} rounded-lg text-sm focus:ring-2 focus:ring-indigo-200 outline-none bg-white appearance-none`}>
+                                    <option value="">Select a course</option>
+                                    <option value="HSC Model Test">HSC Model Test</option>
+                                    <option value="SSC Preparation">SSC Preparation</option>
+                                    <option value="Web Development">Web Development</option>
+                                </select>
+                                {errors.courseTitle && <p className="text-xs text-red-500 mt-1">{errors.courseTitle.message}</p>}
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col">
+                            <label className="text-xs font-semibold text-gray-500 mb-2">Schedule (Day and Time) *</label>
+                            <div className="relative">
+                                <select {...register('schedule', { required: 'Schedule is required' })} className={`w-full p-3 pl-5 border ${errors.schedule ? 'border-red-400' : 'border-gray-200'} rounded-lg text-sm focus:ring-2 focus:ring-indigo-200 outline-none bg-white appearance-none`}>
+                                    <option value="">Select a schedule</option>
+                                    <option value="Sun (4:00PM - 5:00PM), Tue (4:00PM - 5:00PM), Thu (4:00PM - 5:00PM)">Sun, Tue, Thu (4:00PM - 5:00PM)</option>
+                                    <option value="Mon (6:00PM - 7:30PM), Wed (6:00PM - 7:30PM)">Mon, Wed (6:00PM - 7:30PM)</option>
+                                    <option value="Wed (2:00PM - 4:00PM)">Wed (2:00PM - 4:00PM)</option>
+                                    <option value="Sat (9:00AM - 11:00AM), Sun (9:00AM - 11:00AM)">Sat, Sun (9:00AM - 11:00AM)</option>
+                                    <option value="Fri (5:00PM - 7:00PM), Sat (5:00PM - 7:00PM)">Fri, Sat (5:00PM - 7:00PM)</option>
+                                </select>
+                                {errors.schedule && <p className="text-xs text-red-500 mt-1">{errors.schedule.message}</p>}
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="flex flex-col">
+                                <label className="text-xs font-semibold text-gray-500 mb-2">Course Fee (৳) *</label>
+                                <div className="relative">
+                                    <input type="number" {...register('courseFee', { required: 'Course fee is required' })} placeholder="3500" className={`w-full p-3 p-3 border ${errors.courseFee ? 'border-red-400' : 'border-gray-200'} rounded-lg text-sm focus:ring-2 focus:ring-indigo-200 outline-none bg-gray-50`} />
+                                    {errors.courseFee && <p className="text-xs text-red-500 mt-1">{errors.courseFee.message}</p>}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div className="px-6 py-4 border-t bg-white flex justify-end items-center gap-3 rounded-b-2xl">
+                    <button type="button" onClick={() => { reset(); onClose(); }} className="text-sm font-semibold text-gray-600 hover:text-gray-800 px-4 py-2 rounded-md transition-all">Cancel</button>
+                    <button onClick={handleSubmit(onSubmitHandler)} className="px-6 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-md shadow hover:bg-indigo-700 transition-transform active:scale-95">Update Batch</button>
+                </div>
+            </div>
         </div>
-        <p className="text-xs">Start Date: **{batch.enrollmentDate}**</p>
-        <div className="flex justify-between items-center text-xs">
-          <span>Students:</span>
-          <span className="font-bold text-gray-800">0/35</span>
-        </div>
-
-        {/* Toggle Switch (FIXED: now uses state and onClick) */}
-        <div className="flex justify-between items-center pt-2">
-          <span className="font-semibold text-sm">Show on Landing Page</span>
-          <div
-            onClick={() => setIsLandingPageVisible(!isLandingPageVisible)}
-            className={`w-10 h-5 flex items-center rounded-full p-0.5 cursor-pointer transition-colors duration-300 ${isLandingPageVisible ? 'bg-green-500' : 'bg-gray-300'}`}
-          >
-            <div className={`bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ${isLandingPageVisible ? 'translate-x-5' : 'translate-x-0'}`}></div>
-          </div>
-        </div>
-      </div>
-
-      <hr className="my-4" />
-
-      {/* Footer (Fee & Buttons) */}
-      <div className="flex justify-between items-center text-sm">
-        <p className="text-lg font-bold text-green-600">
-          ৳{batch.fee.toLocaleString()}
-        </p>
-        <div className="space-x-2">
-          <button className="text-blue-500 hover:text-blue-700 font-medium p-1">SMS</button>
-          <button className="text-gray-500 hover:text-gray-700 font-medium p-1">Details</button>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
-// --- 3. AddBatchModal Component ---
-const AddBatchModal = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
+// --- 3. BatchCard Component ---
+const BatchCard = ({ batch, onEdit }) => {
+    const statusColor = {
+        Active: 'bg-green-50 text-green-700',
+        Upcoming: 'bg-blue-50 text-blue-700',
+        Completed: 'bg-gray-50 text-gray-700',
+    };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add Batch creation logic here
-    console.log("Form Submitted!");
-    onClose();
-  };
+    return (
+        <div className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-150 overflow-hidden">
+            <div className="bg-gradient-to-r from-indigo-500 to-indigo-600 h-1" />
 
-  return (
-    // Modal Overlay 
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-75 p-4">
+            <div className="p-6">
+                <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center gap-3 flex-1">
+                        
+                        <div className="flex-1 min-w-0">
+                            <h3 className="text-lg font-bold text-gray-900 truncate">{batch.name}</h3>
+                            <p className="text-sm text-gray-500 truncate">{batch.course}</p>
+                        </div>
+                    </div>
+                    <button onClick={() => onEdit(batch)} className="p-2 rounded-lg bg-gray-100 hover:bg-indigo-100 text-gray-600 hover:text-indigo-600 transition-colors">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                    </button>
+                </div>
 
-      {/* Modal Content Box */}
-      <div className="bg-white p-6 rounded-xl shadow-2xl w-full max-w-lg transform transition-all duration-300 scale-100">
+                <div className="space-y-3 mb-4">
+                    <div className="grid grid-cols-2 gap-3">
+                        <div className="bg-gray-50 p-3 rounded-lg">
+                            <div className="text-xs text-gray-500 font-medium mb-1">Fee</div>
+                            <div className="text-lg font-bold text-gray-900">৳{batch.fee.toLocaleString()}</div>
+                        </div>
+                        <div className="bg-gray-50 p-3 rounded-lg">
+                            <div className="text-xs text-gray-500 font-medium mb-1">Start Date</div>
+                            <div className="text-sm font-semibold text-gray-900">{batch.enrollmentDate}</div>
+                        </div>
+                    </div>
 
-        {/* Header and Close Button */}
-        <div className="flex justify-between items-center border-b pb-3 mb-4">
-          <h2 className="text-xl font-bold text-gray-800">➕ Add New Batch</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-red-500 p-1"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-          </button>
+                    <div className="bg-gray-50 p-3 rounded-lg">
+                        <div className="text-xs text-gray-500 font-medium mb-2">Schedule</div>
+                        <div className="space-y-1">
+                            {batch.schedule.slice(0, 2).map((s, i) => (
+                                <div key={i} className="text-xs text-gray-700 flex items-center gap-2">
+                                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                                    {s}
+                                </div>
+                            ))}
+                            {batch.schedule.length > 2 && <div className="text-xs text-gray-400 pt-1">+{batch.schedule.length - 2} more</div>}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex items-center gap-2 pt-3 border-t border-gray-100 flex-wrap">
+                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${statusColor[batch.status] || 'bg-gray-100 text-gray-700'}`}>{batch.status}</span>
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-purple-50 text-purple-700">Recorded</span>
+                </div>
+            </div>
         </div>
-
-        {/* Form Fields (FIXED: Direct input fields used to solve 'label is not defined') */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-
-          {/* Batch Name Field */}
-          <div>
-            <label htmlFor="batchName" className="block text-sm font-medium text-gray-700">Batch Name</label>
-            <input type="text" id="batchName" placeholder="e.g., Sun-4pm" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2.5 focus:ring-green-500 focus:border-green-500 transition duration-150" required />
-          </div>
-
-          {/* Course Title Field */}
-          <div>
-            <label htmlFor="course" className="block text-sm font-medium text-gray-700">Course Title</label>
-            <input type="text" id="course" placeholder="e.g., HSC Model Test" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2.5 focus:ring-green-500 focus:border-green-500 transition duration-150" required />
-          </div>
-
-          {/* Branch Select Field */}
-          <div>
-            <label htmlFor="branch" className="block text-sm font-medium text-gray-700">Branch</label>
-            <select id="branch" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2.5 focus:ring-green-500 focus:border-green-500 transition duration-150">
-              <option value="kushtia">Kushtia Branch</option>
-              <option value="dhaka">Dhaka Branch</option>
-            </select>
-          </div>
-
-          {/* Schedule Textarea */}
-          <div>
-            <label htmlFor="schedule" className="block text-sm font-medium text-gray-700">Schedule (Day and Time)</label>
-            <textarea id="schedule" rows="3" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2.5 focus:ring-green-500 focus:border-green-500 transition duration-150" placeholder="Mon (4:00PM - 5:00PM)&#10;Wed (4:00PM - 5:00PM)"></textarea>
-          </div>
-
-          {/* Course Fee Field */}
-          <div>
-            <label htmlFor="courseFee" className="block text-sm font-medium text-gray-700">Course Fee (৳)</label>
-            <input type="number" id="courseFee" placeholder="3500" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2.5 focus:ring-green-500 focus:border-green-500 transition duration-150" required />
-          </div>
-
-          <div className="pt-4">
-            <button
-              type="submit"
-              className="w-full py-2.5 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150"
-            >
-              Create Batch
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
+    );
 };
 
 
 // --- 4. Main Dashboard Component ---
 const BatchDashboard = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('Active'); // For tab control
+    const [batches, setBatches] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState('');
+    const [filter, setFilter] = useState('All');
+    const [modalOpen, setModalOpen] = useState(false);
+    const [editingBatch, setEditingBatch] = useState(null);
 
-  return (
-    <div className=" bg-gray-50 min-h-screen">
+    useEffect(() => {
+        // simulate fetch
+        setTimeout(() => {
+            setBatches(DUMMY_BATCHES);
+            setLoading(false);
+        }, 300);
+    }, []);
 
-      {/* --- Header Section (Search, Filters, Add Batch) --- */}
-      <div className="flex flex-wrap items-center justify-between mb-6 space-y-4 md:space-y-0">
-        <div className="flex flex-1 flex-wrap gap-3 w-full md:w-auto">
-          <input
-            type="text"
-            placeholder="Search batches..."
-            className="p-2 border border-gray-300 rounded-md shadow-sm w-full md:w-auto flex-1 min-w-[200px]"
-          />
-          <select className="p-2 border border-gray-300 rounded-md shadow-sm w-full md:w-auto">
-            <option>All Classes</option>
-          </select>
-          <select className="p-2 border border-gray-300 rounded-md shadow-sm w-full md:w-auto">
-            <option>All Branches</option>
-          </select>
+    const filtered = batches.filter(b => {
+        const matchesSearch = b.name.toLowerCase().includes(search.toLowerCase()) || b.course.toLowerCase().includes(search.toLowerCase());
+        const matchesFilter = filter === 'All' || b.status === filter || b.branch === filter;
+        return matchesSearch && matchesFilter;
+    });
+
+    const openEditModal = (batch) => {
+        setEditingBatch(batch);
+        setModalOpen(true);
+    };
+
+    const handleSubmit = (data) => {
+        if (!editingBatch) return;
+        setBatches(prev => prev.map(b => b.id === editingBatch.id ? { ...b, name: data.batchName || b.name, course: data.courseTitle || b.course, fee: Number(data.courseFee) || b.fee } : b));
+        setModalOpen(false);
+        setEditingBatch(null);
+    };
+
+    return (
+        <div className="bg-gray-50 min-h-screen p-5">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                <div className="flex items-center gap-3 w-full md:w-auto">
+                    <div className="relative w-full max-w-md">
+                        <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search batches or courses" className="w-full p-3 pr-3 py-2 border border-gray-200 rounded-md shadow-sm focus:ring-1 focus:ring-indigo-200 focus:border-indigo-300" />
+                    </div>
+
+                    <select value={filter} onChange={e => setFilter(e.target.value)} className="p-2 border border-gray-200 rounded-md shadow-sm">
+                        <option value="All">All</option>
+                        <option value="Active">Active</option>
+                        <option value="Upcoming">Upcoming</option>
+                        
+                    </select>
+                </div>
+            </div>
+
+            {loading ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {Array.from({ length: 3 }).map((_, i) => (
+                        <div key={i} className="h-40 bg-white rounded-md animate-pulse" />
+                    ))}
+                </div>
+            ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filtered.map(batch => (
+                        <BatchCard key={batch.id} batch={batch} onEdit={openEditModal} />
+                    ))}
+                </div>
+            )}
+
+            <EditBatchModal isOpen={modalOpen} onClose={() => { setModalOpen(false); setEditingBatch(null); }} batch={editingBatch} onSubmit={handleSubmit} />
         </div>
-
-        {/* Add Batch Button */}
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md shadow transition duration-150 w-full md:w-auto flex items-center justify-center space-x-1"
-        >
-          <span className="text-xl leading-none">+</span> <span>**Add Batch**</span>
-        </button>
-      </div>
-
-      {/* --- Tabs Section --- */}
-      <div className="flex space-x-4 mb-8 border-b border-gray-200">
-        {['Active', 'Upcoming', 'Completed'].map(tab => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`pb-2 px-1 text-sm font-medium transition duration-200 ${activeTab === tab
-              ? 'text-green-600 border-b-2 border-green-600 font-semibold'
-              : 'text-gray-500 hover:text-gray-700'
-              }`}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
-
-      {/* --- Batch Cards Grid --- */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6">
-        {DUMMY_BATCHES.map((batch) => (
-          <BatchCard key={batch.id} batch={batch} />
-        ))}
-      </div>
-
-      {/* --- Modal Component Instance --- */}
-      <AddBatchModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
-    </div>
-  );
+    );
 };
 
 export default BatchDashboard;
