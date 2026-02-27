@@ -234,7 +234,7 @@ const Dashboard = () => {
                 </header>
 
                 <main className="flex-1 overflow-y-auto bg-[#f8fafc] scroll-smooth">
-                    <div className="p-3 lg:p-5 max-w-[1600px] mx-auto min-h-full">
+                    <div className="p-3 lg:p-2 max-w-[1600px] mx-auto min-h-full">
                         {isLoading ? <SkeletonLoader /> : (
                             <motion.div
                                 initial={{ opacity: 0, y: 15 }}
