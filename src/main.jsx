@@ -16,7 +16,6 @@ import ContactUs from './Components/Pages/ContactUs/ContactUs.jsx';
 import Login from './Components/Pages/Login/Login.jsx';
 import Instructors from './Components/Pages/Instructors/Instructors.jsx';
 import Dashboard from './Components/Dashboard/Dashboard.jsx';
-import StudentTable from './Components/AdminDashboard/StudentTable.jsx';
 import Module from './Components/AdminDashboard/Module.jsx';
 import BooksDash from './Components/AdminDashboard/BooksDash.jsx';
 import Attendance from './Components/AdminDashboard/Attendance.jsx';
@@ -30,6 +29,7 @@ import SubscriptionPage from './Components/AdminDashboard/SubscriptionPage.jsx';
 import RegistrationForm from './Components/Pages/Login/RegistrationForm.jsx';
 import AdminHome from './Components/AdminDashboard/AdminHome/AdminHome.jsx';
 import BatchDashboard from './Components/AdminDashboard/Batch/BatchDashboard.jsx';
+import StudentTable from './Components/AdminDashboard/students/StudentTable.jsx';
 
 const router = createBrowserRouter([
   {
