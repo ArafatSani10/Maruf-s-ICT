@@ -94,7 +94,7 @@ const AddBatch = ({ isOpen, onClose }) => {
                                 </div>
                             </div>
 
-                            <div className="flex flex-col">
+                            {/* <div className="flex flex-col">
                                 <label className="text-xs font-semibold text-gray-500 mb-2">Course Fee (৳) *</label>
                                 <div className="relative">
                                     <FaMoneyBillWave className="absolute left-3 top-3 text-gray-400" />
@@ -107,7 +107,7 @@ const AddBatch = ({ isOpen, onClose }) => {
                                     />
                                     {errors.courseFee && <p className="text-xs text-red-500 mt-1">{errors.courseFee.message}</p>}
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
 
                     </div>

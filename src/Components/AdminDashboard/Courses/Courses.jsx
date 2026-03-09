@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaBook, FaMoneyBillWave, FaClock, FaSearch, FaSortAmountDown } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const DUMMY_COURSES = [
     {
@@ -93,11 +94,19 @@ const Courses = () => {
     return (
         <div className="bg-[#f8fafc] min-h-screen p-3 md:p-5 font-sans">
             <div className="max-w-full mx-auto">
-                
+
+               <Link to="/dashboard/Admin-home">
+                <div className="flex justify-end">
+                    <button className="px-6 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium shadow-md hover:shadow-sm hover:scale-105 transition-all duration-300">
+                        Create Course
+                    </button>
+                </div>
+               </Link>
+
                 <div className="flex flex-wrap items-center gap-3 mb-8">
                     <div className="relative w-full max-w-xs">
                         <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" />
-                        <input 
+                        <input
                             type="text"
                             placeholder="Search courses..."
                             value={searchQuery}
@@ -108,7 +117,7 @@ const Courses = () => {
 
                     <div className="relative w-full max-w-[180px]">
                         <FaSortAmountDown className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" />
-                        <select 
+                        <select
                             value={sortBy}
                             onChange={(e) => setSortBy(e.target.value)}
                             className="w-full pl-9 pr-8 py-2 text-sm bg-white border border-slate-200 rounded-lg outline-none focus:border-indigo-500 font-medium text-slate-600 appearance-none cursor-pointer shadow-sm"
@@ -118,7 +127,7 @@ const Courses = () => {
                             <option value="highToLow">Price: High-Low</option>
                         </select>
                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-400">
-                            <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                            <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
                         </div>
                     </div>
                 </div>

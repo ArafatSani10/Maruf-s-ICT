@@ -20,6 +20,7 @@ import {
   FaMoneyBillWave,
   FaShieldAlt
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 // Sample Data Structure with expanded student data
 const studentData = [
@@ -110,8 +111,8 @@ const TableRow = ({ student, onViewClick }) => {
 
       <td className="px-6 py-4 whitespace-nowrap">
         <span className={`inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full ${student.status === 'Active'
-            ? 'bg-green-100 text-green-800'
-            : 'bg-red-100 text-red-800'
+          ? 'bg-green-100 text-green-800'
+          : 'bg-red-100 text-red-800'
           }`}>
           {student.status}
         </span>
@@ -402,7 +403,14 @@ const StudentTable = ({ students = studentData }) => {
 
   return (
     <div className="bg-gray-50 min-h-screen p-4 md:p-3">
-      
+      <Link to="/dashboard/Admin-home">
+        <div className="flex justify-end py-5">
+          <button className="px-6 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium shadow-md hover:shadow-sm hover:scale-105 transition-all duration-300">
+            Add Student
+          </button>
+        </div>
+      </Link>
+
 
       {/* Filter and Search Section */}
       <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-6">
@@ -440,7 +448,11 @@ const StudentTable = ({ students = studentData }) => {
             />
             <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
           </div>
+
+
         </div>
+
+
 
         {/* Stats */}
         <div className="mt-4 flex items-center justify-between p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-100">

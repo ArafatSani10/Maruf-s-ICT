@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 // --- 1. DUMMY DATA (Screenshot-style data) ---
 const DUMMY_BATCHES = [
@@ -107,7 +108,7 @@ const EditBatchModal = ({ isOpen, onClose, batch, onSubmit }) => {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="flex flex-col">
                                 <label className="text-xs font-semibold text-gray-500 mb-2">Course Fee (৳) *</label>
                                 <div className="relative">
@@ -115,7 +116,7 @@ const EditBatchModal = ({ isOpen, onClose, batch, onSubmit }) => {
                                     {errors.courseFee && <p className="text-xs text-red-500 mt-1">{errors.courseFee.message}</p>}
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </form>
 
@@ -137,13 +138,16 @@ const BatchCard = ({ batch, onEdit }) => {
     };
 
     return (
+
         <div className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-150 overflow-hidden">
+
             <div className="bg-gradient-to-r from-indigo-500 to-indigo-600 h-1" />
+
 
             <div className="p-6">
                 <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3 flex-1">
-                        
+
                         <div className="flex-1 min-w-0">
                             <h3 className="text-lg font-bold text-gray-900 truncate">{batch.name}</h3>
                             <p className="text-sm text-gray-500 truncate">{batch.course}</p>
@@ -155,11 +159,11 @@ const BatchCard = ({ batch, onEdit }) => {
                 </div>
 
                 <div className="space-y-3 mb-4">
-                    <div className="grid grid-cols-2 gap-3">
-                        <div className="bg-gray-50 p-3 rounded-lg">
+                    <div className="grid grid-cols-1 gap-3">
+                        {/* <div className="bg-gray-50 p-3 rounded-lg">
                             <div className="text-xs text-gray-500 font-medium mb-1">Fee</div>
                             <div className="text-lg font-bold text-gray-900">৳{batch.fee.toLocaleString()}</div>
-                        </div>
+                        </div> */}
                         <div className="bg-gray-50 p-3 rounded-lg">
                             <div className="text-xs text-gray-500 font-medium mb-1">Start Date</div>
                             <div className="text-sm font-semibold text-gray-900">{batch.enrollmentDate}</div>
@@ -180,10 +184,10 @@ const BatchCard = ({ batch, onEdit }) => {
                     </div>
                 </div>
 
-                <div className="flex items-center gap-2 pt-3 border-t border-gray-100 flex-wrap">
+                {/* <div className="flex items-center gap-2 pt-3 border-t border-gray-100 flex-wrap">
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold ${statusColor[batch.status] || 'bg-gray-100 text-gray-700'}`}>{batch.status}</span>
                     <span className="px-3 py-1 rounded-full text-xs font-semibold bg-purple-50 text-purple-700">Recorded</span>
-                </div>
+                </div> */}
             </div>
         </div>
     );
@@ -227,6 +231,13 @@ const BatchDashboard = () => {
 
     return (
         <div className="bg-gray-50 min-h-screen p-5">
+            <Link to="/dashboard/Admin-home">
+                <div className="flex justify-end">
+                    <button className="px-6 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium shadow-md hover:shadow-sm hover:scale-105 transition-all duration-300">
+                        Create Batch
+                    </button>
+                </div>
+               </Link>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
                 <div className="flex items-center gap-3 w-full md:w-auto">
                     <div className="relative w-full max-w-md">
@@ -237,7 +248,7 @@ const BatchDashboard = () => {
                         <option value="All">All</option>
                         <option value="Active">Active</option>
                         <option value="Upcoming">Upcoming</option>
-                        
+
                     </select>
                 </div>
             </div>
@@ -257,6 +268,8 @@ const BatchDashboard = () => {
             )}
 
             <EditBatchModal isOpen={modalOpen} onClose={() => { setModalOpen(false); setEditingBatch(null); }} batch={editingBatch} onSubmit={handleSubmit} />
+
+
         </div>
     );
 };
